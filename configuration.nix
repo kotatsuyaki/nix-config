@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./hostname.nix
+    /etc/nixos/hardware-configuration.nix
+    /etc/nixos/hostname.nix
   ];
 
   config = lib.mkMerge [{
@@ -19,6 +19,8 @@
       wmctrl xdotool
       # multimedia
       elisa mpc_cli mpd mpdris2 mpv ncmpcpp
+      # sync
+      syncthing
     ];
 
     # Font packages
@@ -56,29 +58,28 @@
     hardware.pulseaudio.enable = true;
     sound.enable = true;
 
-    # MPD
+    ### MPD ###
     services.mpd.enable = true;
     hardware.pulseaudio.extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
     services.mpd.extraConfig = ''
-    follow_outside_symlinks "yes"
-    follow_inside_symlinks "yes"
-    audio_output {
-      type "pulse"
-      name "Pulseaudio"
-      server "127.0.0.1"
-    }
-  '';
+      follow_outside_symlinks "yes"
+      follow_inside_symlinks "yes"
+      audio_output {
+        type "pulse"
+        name "Pulseaudio"
+        server "127.0.0.1"
+      }
+    '';
 
+    ### User ###
     users.users.akitaki = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "input" ];
       shell = pkgs.zsh;
     };
 
-    # default editor to vim
-    # TODO: decide if switching to Emacs is viable
+    ### System env ###
     environment.variables.EDITOR = "vim";
-
     system.stateVersion = "21.05";
 
     ### Emacs with native-comp ###
@@ -90,10 +91,17 @@
       }))
     ];
 
-    # Localization, timezone, and IME
+    ### Syncthing ###
+    services.syncthing = {
+      enable = true;
+      user = "akitaki";
+      dataDir = "/home/akitaki/Sync";
+      configDir = "/home/akitaki/.config/syncthing";
+    };
+
+    ### Localization ###
     time.timeZone = "Asia/Taipei";
     i18n = {
-      consoleFont = "latarcyrheb-sun32";
       defaultLocale = "en_US.UTF-8";
       supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_TW.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" ];
       inputMethod = {
@@ -109,6 +117,12 @@
   } (lib.mkIf (config.networking.hostName == "x13-nixos") {
     environment.systemPackages = with pkgs; [
       fprintd libinput-gestures tlp
+    ];
+
+    # Larger tty font
+    console.font = "ter-132n";
+    console.packages = with pkgs; [
+      terminus
     ];
 
     # TLP
