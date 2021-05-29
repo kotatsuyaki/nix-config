@@ -25,7 +25,7 @@
       # texlive
       texlive.combined.scheme-full
       # kde tools
-      kwallet-pam
+      kwallet-pam plasma-browser-integration libnotify
     ];
 
     # Font packages
