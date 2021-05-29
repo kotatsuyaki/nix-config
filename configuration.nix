@@ -17,7 +17,7 @@
       # languages
       nodejs python39 python39Packages.pip nodePackages.typescript
       # gui tools
-      wmctrl xdotool
+      wmctrl xdotool play-with-mpv
       # multimedia
       elisa mpc_cli mpd mpdris2 mpv ncmpcpp
       # sync
