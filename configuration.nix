@@ -15,7 +15,7 @@
       # cli devtools
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh
       # languages
-      nodejs python310 nodePackages.typescript
+      nodejs python39 python39Packages.pip nodePackages.typescript
       # gui tools
       wmctrl xdotool
       # multimedia
