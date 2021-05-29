@@ -11,6 +11,7 @@
     environment.systemPackages = with pkgs; [
       # gui apps
       alacritty chromium emacsGcc qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
+      libreoffice minecraft lyx
       # cli devtools
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh
       # languages
@@ -21,6 +22,8 @@
       elisa mpc_cli mpd mpdris2 mpv ncmpcpp
       # sync
       syncthing
+      # texlive
+      texlive.combined.scheme-full
       # kde tools
       kwallet-pam
     ];
@@ -35,7 +38,7 @@
 
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "sublimetext3"
+      "sublimetext3" "minecraft-launcher"
     ];
 
     ### Basics ###
