@@ -19,7 +19,7 @@
       # gui tools
       wmctrl xdotool play-with-mpv
       # multimedia
-      elisa mpc_cli mpd mpdris2 mpv ncmpcpp
+      elisa mpc_cli mpd mpdris2 mpv ncmpcpp ffmpeg imagemagick
       # sync
       syncthing
       # texlive
