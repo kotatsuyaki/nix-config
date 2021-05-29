@@ -10,7 +10,7 @@
     ### Packages ###
     environment.systemPackages = with pkgs; [
       # gui apps
-      alacritty chromium emacsGcc qutebrowser tdesktop zathura
+      alacritty chromium emacsGcc qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
       # cli devtools
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh
       # languages
@@ -31,6 +31,11 @@
       noto-fonts-emoji
       fira-code
       fira-mono
+    ];
+
+    # Allow some nonfree packages
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "sublimetext3"
     ];
 
     ### Basics ###
