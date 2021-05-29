@@ -21,6 +21,8 @@
       elisa mpc_cli mpd mpdris2 mpv ncmpcpp
       # sync
       syncthing
+      # kde tools
+      kwallet-pam
     ];
 
     # Font packages
