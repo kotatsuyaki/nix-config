@@ -13,7 +13,7 @@
       alacritty chromium emacsGcc qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
       libreoffice minecraft lyx
       # cli devtools
-      curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh
+      curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh aria2
       # languages
       nodejs python39 python39Packages.pip nodePackages.typescript
       # gui tools
