@@ -26,6 +26,10 @@
       texlive.combined.scheme-full
       # kde tools
       kwallet-pam plasma-browser-integration libnotify
+      # theme gtk apps
+      gnome.adwaita-icon-theme
+      # virtualization
+      libvirt virt-manager
     ];
 
     # Font packages
@@ -110,6 +114,11 @@
         url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
       }))
     ];
+
+    ### Virtualisation
+    virtualisation.libvirtd = {
+      enable = true;
+    };
 
     ### Syncthing ###
     services.syncthing = {
