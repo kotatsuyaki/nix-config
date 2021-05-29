@@ -44,6 +44,11 @@
     # Firmware thing
     hardware.enableRedistributableFirmware = true;
 
+    # Decrease systemd timeout
+    systemd.extraConfig = ''
+      DefaultTimeoutStopSec=15s
+    '';
+
     ### X settings ###
     services.xserver.enable = true;
     services.xserver.xkbOptions = "altwin:swap_alt_win";
