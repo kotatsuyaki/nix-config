@@ -25,7 +25,7 @@
       # texlive
       texlive.combined.scheme-full
       # kde tools
-      kwallet-pam plasma-browser-integration libnotify
+      kwallet-pam plasma-browser-integration libnotify ark unrar
       # theme gtk apps
       gnome.adwaita-icon-theme
       # virtualization
@@ -42,7 +42,7 @@
 
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "sublimetext3" "minecraft-launcher"
+      "sublimetext3" "minecraft-launcher" "unrar"
     ];
 
     ### Basics ###
