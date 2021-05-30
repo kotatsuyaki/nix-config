@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
+  ### Local config files ###
+  # hardware-configuration.nix should be generated during install.
+  # hostname.nix must contain ` networking.hostName = "rx570-nixos"; `.
   imports = [
     /etc/nixos/hardware-configuration.nix
     /etc/nixos/hostname.nix
@@ -26,7 +29,7 @@
       texlive.combined.scheme-full
       # kde tools
       kwallet-pam plasma-browser-integration libnotify ark unrar
-      # theme gtk apps
+      # theme gtk apps properly
       gnome.adwaita-icon-theme
       # virtualization
       libvirt virt-manager
@@ -164,6 +167,7 @@
       };
     };
 
+    # Fingerprint
     services.fprintd.enable = true;
   })];
 }
