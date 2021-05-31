@@ -46,7 +46,7 @@
 
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "sublimetext3" "minecraft-launcher" "unrar"
+      "sublimetext3" "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings"
     ];
 
     ### Basics ###
@@ -169,6 +169,12 @@
 
     # Fingerprint
     services.fprintd.enable = true;
+  }) (lib.mkIf (config.networking.hostName == "rtx3070-nixos") {
+    # Nvidia driver
+    services.xserver.videoDrivers = [ "nvidia" ];
+
+    # ssh server
+    services.sshd.enable = true;
   })];
 }
   
