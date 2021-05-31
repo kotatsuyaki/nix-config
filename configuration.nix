@@ -175,6 +175,7 @@
 
     # ssh server
     services.sshd.enable = true;
+    services.openssh.ports = import /etc/nixos/ssh-ports.nix;
   })];
 }
   
