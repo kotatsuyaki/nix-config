@@ -33,6 +33,8 @@
       gnome.adwaita-icon-theme
       # virtualization
       libvirt virt-manager
+      # container
+      podman
     ];
 
     # Font packages
@@ -120,8 +122,9 @@
     ];
 
     ### Virtualisation
-    virtualisation.libvirtd = {
-      enable = true;
+    virtualisation = {
+      libvirtd.enable = true;
+      podman.enable = true;
     };
 
     ### Syncthing ###
