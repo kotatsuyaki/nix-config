@@ -18,7 +18,7 @@
       # cli devtools
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh aria2
       # languages
-      nodejs python39 python39Packages.pip nodePackages.typescript
+      nodejs python39 python39Packages.pip nodePackages.typescript clang-tools clang
       # gui tools
       wmctrl xdotool play-with-mpv
       # multimedia
