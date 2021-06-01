@@ -1,6 +1,14 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
+    overlays = [
+      (import (builtins.fetchTarball {
+        url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+      }))
+    ];
+  };
+in {
   ### Local config files ###
   # hardware-configuration.nix should be generated during install.
   # hostname.nix must contain ` networking.hostName = "rx570-nixos"; `.
@@ -13,7 +21,7 @@
     ### Packages ###
     environment.systemPackages = with pkgs; [
       # gui apps
-      alacritty chromium emacsGcc qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
+      alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
       libreoffice minecraft lyx
       # cli devtools
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh aria2
@@ -114,15 +122,6 @@
     environment.variables.EDITOR = "vim";
     system.stateVersion = "21.05";
 
-    ### Emacs with native-comp ###
-    services.emacs.package = pkgs.emacsUnstable;
-
-    nixpkgs.overlays = [
-      (import (builtins.fetchTarball {
-        url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      }))
-    ];
-
     ### Virtualisation
     virtualisation = {
       libvirtd.enable = true;
@@ -192,6 +191,14 @@
     # ssh server
     services.sshd.enable = true;
     services.openssh.ports = import /etc/nixos/ssh-ports.nix;
-  })];
+  }) {
+    # Emacs with native-comp
+    # To use community cachix:
+    # # nix-env -iA cachix -f https://cachix.org/api/v1/install
+    # # cachix use nix-community
+    environment.systemPackages = [
+      unstable.emacsGcc
+    ];
+  }];
 }
-  
+
