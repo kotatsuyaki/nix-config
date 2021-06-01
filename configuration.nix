@@ -125,7 +125,10 @@
     ### Virtualisation
     virtualisation = {
       libvirtd.enable = true;
-      podman.enable = true;
+      podman = {
+        enable = true;
+        enableNvidia = true;
+      };
     };
 
     ### Syncthing ###
