@@ -48,7 +48,8 @@
 
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "sublimetext3" "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings"
+      "sublimetext3" "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings" "nvidia-persistenced" "cudatoolkit"
+      "libtorch" "pytorch"
     ];
 
     ### Basics ###
