@@ -177,9 +177,17 @@
     # Fingerprint
     services.fprintd.enable = true;
   }) (lib.mkIf (config.networking.hostName == "rtx3070-nixos") {
+    environment.systemPackages = with pkgs; [
+      nvidia-docker nvidia-podman cudatoolkit_11_1 cudnn_cudatoolkit_11_1
+      python3Packages.pytorch-bin
+      (libtorch-bin.override { cudaSupport = true; })
+    ];
+
     # Nvidia driver
     services.xserver.videoDrivers = [ "nvidia" ];
 
+    hardware.opengl.enable = true;
+    hardware.opengl.driSupport32Bit = true;
     # ssh server
     services.sshd.enable = true;
     services.openssh.ports = import /etc/nixos/ssh-ports.nix;
