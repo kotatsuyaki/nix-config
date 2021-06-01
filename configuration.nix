@@ -19,6 +19,7 @@
       curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh aria2
       # languages
       nodejs python3 python3Packages.pip nodePackages.typescript rust-analyzer rustup
+      clang-tools clang
       # gui tools
       wmctrl xdotool play-with-mpv
       # multimedia
