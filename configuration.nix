@@ -25,7 +25,9 @@ in {
       alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
       libreoffice minecraft lyx
       # cli devtools
-      curl fzf git gnumake htop lazygit p7zip ranger ripgrep vim wget xsel zsh aria2
+      curl fzf git gnumake htop lazygit p7zip ripgrep vim wget xsel zsh aria2
+      # terminal file manager
+      ranger ueberzug
       # languages
       nodejs python3 python3Packages.pip nodePackages.typescript rust-analyzer rustup
       clang-tools clang
