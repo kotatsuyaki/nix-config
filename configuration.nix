@@ -15,6 +15,7 @@ in {
   imports = [
     /etc/nixos/hardware-configuration.nix
     /etc/nixos/hostname.nix
+    /etc/nixos/cachix.nix
   ];
 
   config = lib.mkMerge [{
