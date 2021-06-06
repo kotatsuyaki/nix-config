@@ -23,24 +23,22 @@ in {
     environment.systemPackages = with pkgs; [
       # gui apps
       alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
-      libreoffice minecraft lyx
-      # cli devtools
-      curl fzf git gnumake htop lazygit p7zip ripgrep vim wget xsel zsh aria2
+      libreoffice minecraft lyx teams feh
+      # cli system-wide tools
+      curl fzf git htop lazygit p7zip ripgrep vim wget zsh
+      aria2 tmux
       # terminal file manager
       ranger ueberzug
-      # languages
-      nodejs python3 python3Packages.pip nodePackages.typescript rust-analyzer rustup
-      clang-tools clang
-      # gui tools
-      wmctrl xdotool play-with-mpv
+      # desktop supplementary tools
+      wmctrl xdotool play-with-mpv xsel
       # multimedia
       elisa mpc_cli mpd mpdris2 mpv ncmpcpp ffmpeg imagemagick
       # sync
       syncthing
       # texlive
       texlive.combined.scheme-full
-      # kde tools
-      kwallet-pam plasma-browser-integration libnotify ark unrar
+      # kde supplementaries
+      kwallet-pam plasma-browser-integration libnotify ark unrar libappindicator-gtk3
       # theme gtk apps properly
       gnome.adwaita-icon-theme
       # virtualization
