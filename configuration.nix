@@ -47,6 +47,8 @@ in {
       libvirt virt-manager
       # container
       podman
+      # for lorri
+      direnv
     ];
 
     # Font packages
@@ -95,6 +97,9 @@ in {
     # Audio
     hardware.pulseaudio.enable = true;
     sound.enable = true;
+
+    # Lorri
+    services.lorri.enable = true;
 
     ### MPD ###
     hardware.pulseaudio.extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
