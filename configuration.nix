@@ -26,7 +26,7 @@ in {
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep vim wget zsh
-      aria2 tmux
+      aria2 tmux python3
       # terminal file manager
       ranger ueberzug
       # desktop supplementary tools
