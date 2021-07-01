@@ -23,7 +23,7 @@ in {
     environment.systemPackages = with pkgs; [
       # gui apps
       alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
-      libreoffice minecraft lyx teams feh
+      libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep vim wget zsh
       aria2 tmux
