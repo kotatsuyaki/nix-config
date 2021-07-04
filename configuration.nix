@@ -57,6 +57,8 @@ in {
       podman
       # for lorri
       direnv
+      # todo list
+      taskwarrior taskwarrior-tui
       # customized vim
       (pkgs.neovim.override {
        viAlias = true;
