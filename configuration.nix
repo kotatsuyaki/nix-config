@@ -31,7 +31,8 @@ in {
     ### Packages ###
     environment.systemPackages = with pkgs; [
       # gui apps
-      alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
+      alacritty chromium qutebrowser tdesktop zathura sublime3
+      sublime-merge thunderbird birdtray gimp
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep wget zsh
@@ -93,7 +94,7 @@ in {
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "sublimetext3" "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings" "nvidia-persistenced" "cudatoolkit"
-      "libtorch" "pytorch" "teams"
+      "libtorch" "pytorch" "teams" "sublime-merge"
     ];
 
     ### Basics ###
