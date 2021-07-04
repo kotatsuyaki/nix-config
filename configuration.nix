@@ -8,6 +8,15 @@ let
       }))
     ];
   };
+  vim-colors-github = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-colors-github";
+    src = pkgs.fetchFromGitHub {
+      owner = "cormacrelf";
+      repo = "vim-colors-github";
+      rev = "ee42a68d95078f5a3d1c0fb14462cc781b244ee2";
+      sha256 = "1kvvd38nsbpq7a3lf7yj94mbydyb7yiz3mvwbyf6xlhida3y95p3";
+    };
+  };
 in {
   ### Local config files ###
   # hardware-configuration.nix should be generated during install.
@@ -25,7 +34,7 @@ in {
       alacritty chromium qutebrowser tdesktop zathura sublime3 thunderbird birdtray gimp
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
-      curl fzf git htop lazygit p7zip ripgrep vim wget zsh
+      curl fzf git htop lazygit p7zip ripgrep wget zsh
       aria2 tmux python3
       # terminal file manager
       ranger ueberzug
@@ -47,7 +56,29 @@ in {
       podman
       # for lorri
       direnv
-    ];
+      # customized vim
+      (pkgs.neovim.override {
+       viAlias = true;
+       vimAlias = true; 
+        configure = {
+          customRC = ''
+            colo github
+            set termguicolors bg=light
+            set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4
+            set clipboard=unnamed,unnamedplus
+            nn ; :
+            vn ; :
+            nn <silent> <CR> :noh<CR><CR>
+            syn on
+            filet plugin indent on
+          '';
+          packages.myPlugins = with pkgs.vimPlugins; {
+            start = [ vim-nix vim-colors-github ];
+            opt = [];
+          };
+      };
+    })
+  ];
 
     # Font packages
     fonts.fonts = with pkgs; [
@@ -126,7 +157,7 @@ in {
     };
 
     ### System env ###
-    environment.variables.EDITOR = "vim";
+    environment.variables.EDITOR = "nvim";
     system.stateVersion = "21.05";
 
     ### Virtualisation
