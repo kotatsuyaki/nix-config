@@ -69,6 +69,7 @@ in {
             set termguicolors bg=light
             set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4
             set clipboard=unnamed,unnamedplus
+            set updatetime=100
             nn ; :
             vn ; :
             nn <silent> <CR> :noh<CR><CR>
@@ -76,7 +77,7 @@ in {
             filet plugin indent on
           '';
           packages.myPlugins = with pkgs.vimPlugins; {
-            start = [ vim-nix vim-colors-github ];
+            start = [ vim-nix vim-colors-github vim-surround vim-gitgutter ];
             opt = [];
           };
       };
