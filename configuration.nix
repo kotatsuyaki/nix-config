@@ -108,6 +108,7 @@ in {
     networking.useDHCP = false;
     networking.networkmanager.enable = true;
     networking.firewall.enable = false;
+    networking.networkmanager.insertNameservers = [ "8.8.8.8" "8.8.4.4" ];
 
     # Firmware thing
     hardware.enableRedistributableFirmware = true;
