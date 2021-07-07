@@ -234,6 +234,9 @@ in {
     # ssh server
     services.sshd.enable = true;
     services.openssh.ports = import /etc/nixos/ssh-ports.nix;
+    services.openssh.forwardX11 = true;
+    programs.ssh.forwardX11 = true;
+    programs.ssh.setXAuthLocation = true;
   }) {
     # Emacs with native-comp
     # To use community cachix:
