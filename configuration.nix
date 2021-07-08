@@ -36,7 +36,7 @@ in {
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep wget zsh
-      aria2 tmux python3
+      aria2 tmux python3 unzip
       # terminal file manager
       ranger ueberzug
       # desktop supplementary tools
@@ -97,7 +97,7 @@ in {
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "sublimetext3" "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings" "nvidia-persistenced" "cudatoolkit"
-      "libtorch" "pytorch" "teams" "sublime-merge"
+      "libtorch" "pytorch" "teams" "sublime-merge" "unzip"
     ];
 
     ### Basics ###
