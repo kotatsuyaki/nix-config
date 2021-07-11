@@ -77,7 +77,10 @@ in {
             filet plugin indent on
           '';
           packages.myPlugins = with pkgs.vimPlugins; {
-            start = [ vim-nix vim-colors-github vim-surround vim-gitgutter ];
+            start = [
+              vim-nix vim-colors-github vim-surround vim-gitgutter
+              vim-which-key dart-vim-plugin
+            ];
             opt = [];
           };
       };
