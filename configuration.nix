@@ -32,7 +32,7 @@ in {
     environment.systemPackages = with pkgs; [
       # gui apps
       alacritty chromium qutebrowser tdesktop zathura sublime3
-      sublime-merge thunderbird birdtray gimp
+      sublime-merge thunderbird birdtray gimp tracy
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep wget zsh
@@ -54,38 +54,41 @@ in {
       # virtualization
       libvirt virt-manager
       # container
-      podman
+      podman appimage-run
       # for lorri
       direnv
-      # todo list
-      taskwarrior taskwarrior-tui
       # customized vim
-      (pkgs.neovim.override {
-       viAlias = true;
-       vimAlias = true; 
-        configure = {
-          customRC = ''
-            colo github
-            set termguicolors bg=light
-            set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4
-            set clipboard=unnamed,unnamedplus
-            set updatetime=100
-            nn ; :
-            vn ; :
-            nn <silent> <CR> :noh<CR><CR>
-            syn on
-            filet plugin indent on
-          '';
-          packages.myPlugins = with pkgs.vimPlugins; {
-            start = [
-              vim-nix vim-colors-github vim-surround vim-gitgutter
-              vim-which-key dart-vim-plugin
-            ];
-            opt = [];
+      (
+        pkgs.neovim.override {
+          viAlias = true;
+          vimAlias = true; 
+          configure = {
+            customRC = ''
+              colo github
+              set termguicolors bg=light
+              set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4
+              set clipboard=unnamed,unnamedplus
+              set updatetime=100
+              nn ; :
+              vn ; :
+              nn <silent> <CR> :noh<CR><CR>
+              syn on
+              filet plugin indent on
+            '';
+            packages.myPlugins = with pkgs.vimPlugins; {
+              start = [
+                vim-nix vim-colors-github vim-surround vim-gitgutter
+                vim-which-key dart-vim-plugin
+              ];
+              opt = [];
+            };
           };
-      };
-    })
-  ];
+        }
+      )
+    ];
+
+    # Lorri
+    services.lorri.enable = true;
 
     # Font packages
     fonts.fonts = with pkgs; [
