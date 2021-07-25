@@ -87,9 +87,6 @@ in {
       )
     ];
 
-    # Lorri
-    services.lorri.enable = true;
-
     # Font packages
     fonts.fonts = with pkgs; [
       noto-fonts
