@@ -225,7 +225,7 @@ in {
   }) (lib.mkIf (config.networking.hostName == "rtx3070-nixos") {
     environment.systemPackages = with pkgs; [
       nvidia-docker nvidia-podman cudatoolkit_11_1 cudnn_cudatoolkit_11_1
-      python3Packages.pytorch-bin
+      python3Packages.pytorch-bin nvtop
       (libtorch-bin.override { cudaSupport = true; })
     ];
 
