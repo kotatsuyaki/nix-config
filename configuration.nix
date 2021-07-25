@@ -32,7 +32,7 @@ in {
     environment.systemPackages = with pkgs; [
       # gui apps
       alacritty chromium qutebrowser tdesktop zathura sublime3
-      sublime-merge thunderbird birdtray gimp
+      sublime-merge thunderbird birdtray gimp tracy
       libreoffice minecraft lyx teams feh unstable.musescore
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep wget zsh
