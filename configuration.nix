@@ -389,6 +389,16 @@ in {
     ### System env ###
     environment.variables.EDITOR = "nvim";
     system.stateVersion = "21.05";
+    environment.etc = {
+      # Set git commit --verbose as default
+      gitconfig = {
+        text = ''
+          [commit]
+          verbose = true
+        '';
+        mode = "444";
+      };
+    };
 
     ### Virtualisation
     virtualisation = {
