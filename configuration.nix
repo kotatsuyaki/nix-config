@@ -62,6 +62,17 @@ let
           call coc#config('rust-analyzer', {'server': {'path': trim(system('which rust-analyzer'))}})
         endif
 
+        " Disable macro-error for rust, since it produces spurious errors
+        call coc#config('rust-analyzer.diagnostics.disabled', ['macro-error'])
+
+        " Project-specific tabnine path
+        if executable('TabNine')
+          call coc#config('tabnine.binary_path', trim(system('which TabNine')))
+        endif
+
+        " Enable format-on-save for all filetypes
+        call coc#config('coc.preferences', {'formatOnSaveFiletypes': ['*']})
+
         " Recommended settings according to barbar
         let bufferline = get(g:, 'bufferline', {})
         let bufferline.icons = 'numbers'
@@ -235,8 +246,9 @@ let
           vim-nix dart-vim-plugin vim-toml
           # Basics
           vim-surround nvim-autopairs kommentary which-key-nvim
+          indent-blankline-nvim-lua
           # Intellisense
-          coc-nvim coc-rust-analyzer coc-lists
+          coc-nvim coc-rust-analyzer coc-lists coc-pyright coc-tabnine
           # Git
           lazygit-nvim gitsigns-nvim
           # Files
