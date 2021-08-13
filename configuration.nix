@@ -272,7 +272,7 @@ in {
 
       # cli system-wide tools
       curl fzf git htop lazygit p7zip ripgrep wget zsh
-      aria2 tmux python3 nodejs unzip
+      aria2 tmux python3 nodejs unzip bat
 
       # terminal file manager
       ranger ueberzug
