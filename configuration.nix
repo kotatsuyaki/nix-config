@@ -282,6 +282,7 @@ in {
 
       # kde utilities
       kwallet-pam plasma-browser-integration libnotify ark unrar libappindicator-gtk3
+      plasma5Packages.kio-extras
 
       # media
       mpc_cli mpd mpdris2 mpv ncmpcpp ffmpeg imagemagick
