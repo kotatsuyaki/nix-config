@@ -15,9 +15,18 @@ let
       sha256 = "06shsdv92ykf3zx33a7v4xlqfi6jwdpvv9j6hx4n6alk4db02kgd";
     };
   };
+  coc-flutter = pkgs.vimUtils.buildVimPlugin {
+    name = "coc-flutter";
+    src = pkgs.fetchFromGitHub {
+      owner = "iamcco";
+      repo = "coc-flutter";
+      rev = "650b7789e15db58c69963196b9b17b560f7fd94b";
+      sha256 = "1mzgls3yrpvdxzkby3l4yc2yja63vph7lnsq31qgb1ap448xv231";
+    };
+  };
   my-neovim = (unstable.neovim.override {
     viAlias = true;
-    vimAlias = true; 
+    vimAlias = true;
     configure = {
       customRC = ''
         colo edge
@@ -54,9 +63,6 @@ let
         " Setup git gutter
         lua require('gitsigns').setup()
 
-        " Setup nvim-autopairs
-        lua require('nvim-autopairs').setup{}
-
         " Project-specific rust-analyzer path (to avoid installing it globally)
         if executable('rust-analyzer')
           call coc#config('rust-analyzer', {'server': {'path': trim(system('which rust-analyzer'))}})
@@ -64,6 +70,9 @@ let
 
         " Disable macro-error for rust, since it produces spurious errors
         call coc#config('rust-analyzer.diagnostics.disabled', ['macro-error'])
+        call coc#config('rust-analyzer.cargo.loadOutDirsFromCheck', 1)
+        call coc#config('rust-analyzer.procMacro.enable', 1)
+
         " nix lsp
         call coc#config('languageserver.nix', { 'command': 'rnix-lsp', 'filetypes': ['nix'] })
 
@@ -243,24 +252,42 @@ let
       packages.myPlugins = with pkgs.vimPlugins; {
         start = [
           # Appearance
-          edge barbar-nvim lualine-nvim
+          edge
+          barbar-nvim
+          lualine-nvim
           # Languages
-          vim-nix dart-vim-plugin vim-toml
+          vim-nix
+          dart-vim-plugin
+          vim-toml
+          vim-markdown
+          rust-vim
           # Basics
-          vim-surround nvim-autopairs kommentary which-key-nvim
+          vim-surround
+          kommentary
+          which-key-nvim
           indent-blankline-nvim-lua
+          editorconfig-vim
           # Intellisense
-          coc-nvim coc-rust-analyzer coc-lists coc-pyright coc-tabnine
+          coc-nvim
+          coc-rust-analyzer
+          coc-lists
+          coc-pyright
+          coc-tabnine
+          coc-flutter
+          coc-pairs
+          coc-clangd
           # Git
-          lazygit-nvim gitsigns-nvim
+          lazygit-nvim
+          gitsigns-nvim
           # Files
           nvim-tree-lua
         ];
-        opt = [];
+        opt = [ ];
       };
     };
   });
-in {
+in
+{
   ### Local config files ###
   # hardware-configuration.nix should be generated during install.
   # hostname.nix must contain ` networking.hostName = "rx570-nixos"; `.
@@ -270,37 +297,76 @@ in {
     /etc/nixos/cachix.nix
   ];
 
+
   config = lib.mkMerge [{
     ### Packages ###
     environment.systemPackages = with pkgs; [
       # web
-      chromium tdesktop thunderbird birdtray teams
+      chromium
+      tdesktop
+      thunderbird
+      birdtray
+      teams
       # office
-      libreoffice lyx
+      libreoffice
+      lyx
       # gui devtools
-      alacritty grpcui 
+      alacritty
+      grpcui
       # game
       minecraft
       # Sublime 
-      unstable.sublime4 sublime-merge
+      unstable.sublime4
+      sublime-merge
 
       # cli system-wide tools
-      curl fzf git htop lazygit p7zip ripgrep wget zsh
-      aria2 tmux python3 nodejs unzip bat
+      curl
+      fzf
+      git
+      htop
+      lazygit
+      p7zip
+      ripgrep
+      wget
+      zsh
+      aria2
+      tmux
+      python3
+      nodejs
+      unzip
+      bat
 
       # terminal file manager
-      ranger ueberzug
+      ranger
+      ueberzug
 
       # desktop utilities
-      wmctrl xdotool play-with-mpv xsel
+      wmctrl
+      xdotool
+      play-with-mpv
+      xsel
 
       # kde utilities
-      kwallet-pam plasma-browser-integration libnotify ark unrar libappindicator-gtk3
+      kwallet-pam
+      plasma-browser-integration
+      libnotify
+      ark
+      unrar
+      libappindicator-gtk3
       plasma5Packages.kio-extras
 
       # media
-      mpc_cli mpd mpdris2 mpv ncmpcpp ffmpeg imagemagick
-      zathura gimp unstable.musescore feh
+      mpc_cli
+      mpd
+      mpdris2
+      mpv
+      ncmpcpp
+      ffmpeg
+      imagemagick
+      zathura
+      gimp
+      unstable.musescore
+      feh
 
       # sync
       syncthing
@@ -312,7 +378,10 @@ in {
       gnome.adwaita-icon-theme
 
       # virtualization & container
-      libvirt virt-manager podman appimage-run
+      libvirt
+      virt-manager
+      podman
+      appimage-run
 
       # for lorri
       direnv
@@ -336,8 +405,17 @@ in {
 
     # Allow some nonfree packages
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "minecraft-launcher" "unrar" "nvidia-x11" "nvidia-settings" "nvidia-persistenced" "cudatoolkit"
-      "libtorch" "pytorch" "teams" "sublime-merge" "unzip"
+      "minecraft-launcher"
+      "unrar"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+      "cudatoolkit"
+      "libtorch"
+      "pytorch"
+      "teams"
+      "sublime-merge"
+      "unzip"
     ];
 
     ### Basics ###
@@ -447,46 +525,55 @@ in {
         ];
       };
     };
-  } (lib.mkIf (config.networking.hostName == "x13-nixos") {
-    environment.systemPackages = with pkgs; [
-      fprintd libinput-gestures tlp
-    ];
+  }
+    (lib.mkIf (config.networking.hostName == "x13-nixos") {
+      environment.systemPackages = with pkgs; [
+        fprintd
+        libinput-gestures
+        tlp
+      ];
 
-    # Larger tty font
-    console.font = "ter-132n";
-    console.packages = with pkgs; [
-      terminus
-    ];
+      # Larger tty font
+      console.font = "ter-132n";
+      console.packages = with pkgs; [
+        terminus
+      ];
 
-    # TLP
-    services.tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNER_ON_BAT = "powersave";
-        CPU_SCALING_GOVERNER_ON_AC = "performance";
+      # TLP
+      services.tlp = {
+        enable = true;
+        settings = {
+          CPU_SCALING_GOVERNER_ON_BAT = "powersave";
+          CPU_SCALING_GOVERNER_ON_AC = "performance";
+        };
       };
-    };
 
-    # Fingerprint
-    services.fprintd.enable = true;
-  }) (lib.mkIf (config.networking.hostName == "rtx3070-nixos") {
-    environment.systemPackages = with pkgs; [
-      nvidia-docker nvidia-podman cudatoolkit_11_1 cudnn_cudatoolkit_11_1
-      python3Packages.pytorch-bin nvtop
-      (libtorch-bin.override { cudaSupport = true; })
-    ];
+      # Fingerprint
+      services.fprintd.enable = true;
+    })
+    (lib.mkIf (config.networking.hostName == "rtx3070-nixos") {
+      environment.systemPackages = with pkgs; [
+        nvidia-docker
+        nvidia-podman
+        cudatoolkit_11_1
+        cudnn_cudatoolkit_11_1
+        python3Packages.pytorch-bin
+        nvtop
+        (libtorch-bin.override { cudaSupport = true; })
+      ];
 
-    # Nvidia driver
-    services.xserver.videoDrivers = [ "nvidia" ];
+      # Nvidia driver
+      services.xserver.videoDrivers = [ "nvidia" ];
 
-    hardware.opengl.enable = true;
-    hardware.opengl.driSupport32Bit = true;
-    # ssh server
-    services.sshd.enable = true;
-    services.openssh.ports = import /etc/nixos/ssh-ports.nix;
-    services.openssh.forwardX11 = true;
-    programs.ssh.forwardX11 = true;
-    programs.ssh.setXAuthLocation = true;
-  })];
+      hardware.opengl.enable = true;
+      hardware.opengl.driSupport32Bit = true;
+      # ssh server
+      services.sshd.enable = true;
+      services.openssh.ports = import /etc/nixos/ssh-ports.nix;
+      services.openssh.forwardX11 = true;
+      programs.ssh.forwardX11 = true;
+      programs.ssh.setXAuthLocation = true;
+      programs.ssh.setXAuthLocation = true;
+    })];
 }
 
