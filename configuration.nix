@@ -64,6 +64,8 @@ let
 
         " Disable macro-error for rust, since it produces spurious errors
         call coc#config('rust-analyzer.diagnostics.disabled', ['macro-error'])
+        " nix lsp
+        call coc#config('languageserver.nix', { 'command': 'rnix-lsp', 'filetypes': ['nix'] })
 
         " Project-specific tabnine path
         if executable('TabNine')
