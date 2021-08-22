@@ -12,15 +12,16 @@ let
   office-gui-apps = with pkgs; [ libreoffice lyx ];
   media-gui-apps = with pkgs; [ unstable.musescore zathura mpv gimp feh ];
   dev-gui-apps = with pkgs; [ alacritty unstable.sublime4 sublime-merge ];
-
-  system-prog-langs = with pkgs; [ python3 nodejs ];
   games = with pkgs; [ minecraft ];
+  gui-pkgs = builtins.concatLists [ web-gui-apps office-gui-apps media-clis dev-gui-apps games ];
 
   de-clis = with pkgs; [ wmctrl xdotool play-with-mpv xsel ];
   media-clis = with pkgs; [ mpc_cli mpd mpdris2 ncmpcpp ffmpeg imagemagick ];
   system-clis = with pkgs; [ aria2 bat curl fzf git ripgrep tmux wget zsh ];
-  system-tuis = with pkgs; [ htop lazygit ranger ueberzug ];
+  system-tuis = with pkgs; [ htop lazygit ranger ueberzug my-neovim ];
+  cli-pkgs = builtins.concatLists [ de-clis media-clis system-clis system-tuis ];
 
+  system-prog-langs = with pkgs; [ python3 nodejs ];
   archive-utils = with pkgs; [ unrar p7zip unzip ark ];
   virt-utils = with pkgs; [ libvirt virt-manager podman appimage-run ];
   kde-support = with pkgs; [
@@ -31,6 +32,8 @@ let
     plasma5Packages.kio-extras
     gnome.adwaita-icon-theme
   ];
+
+  misc-pkgs = builtins.concatLists [ archive-utils virt-utils kde-support system-prog-langs ];
 in
 {
   ### Local config files ###
@@ -47,23 +50,14 @@ in
 
     ### Packages ###
     environment.systemPackages = builtins.concatLists [
-      web-gui-apps
-      office-gui-apps
-      dev-gui-apps
-      games
-      system-clis
-      system-tuis
-      system-prog-langs
-      de-clis
-      kde-support
-      archive-utils
-      media-gui-apps
+      gui-pkgs
+      cli-pkgs
+      misc-pkgs
     ] ++ (with pkgs;
       [
         texlive.combined.scheme-full
         syncthing
         direnv
-        my-neovim
       ]);
 
     # Font packages
