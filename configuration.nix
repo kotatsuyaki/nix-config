@@ -1,11 +1,10 @@
 { config, pkgs, lib, ... }:
 
 let
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "sublimetext4"
-    ];
-  };
+  # to add nixos-unstable channel:
+  # nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+  # nix-channel --update
+  unstable = import <nixos-unstable> { config.allowUnfree = true; };
   my-neovim = import ./neovim.nix { pkgs = unstable; };
 
   # lists of packages, divided into several categories
