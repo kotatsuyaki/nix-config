@@ -174,7 +174,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function',''')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
@@ -191,10 +191,10 @@ lua << EOF
 require('lualine').setup {
     options = {
         icons_enabled = false,
-        component_separators = ''',
-        section_separators = ''',
+        component_separators = '',
+        section_separators = '',
         theme = 'onelight'
-        },
+    },
     sections = {
         lualine_y = {
             'progress',
@@ -206,7 +206,8 @@ require('lualine').setup {
                     color_info = '#4b505b',
                     color_hint = '#4b505b'
             }
-            }
         }
     }
+}
 EOF
+
