@@ -7,6 +7,31 @@ let
     ];
   };
   my-neovim = import ./neovim.nix { pkgs = unstable; };
+
+  # lists of packages, divided into several categories
+  web-gui-apps = with pkgs; [ chromium tdesktop thunderbird birdtray teams ];
+  office-gui-apps = with pkgs; [ libreoffice lyx ];
+  media-gui-apps = with pkgs; [ unstable.musescore zathura mpv gimp feh ];
+  dev-gui-apps = with pkgs; [ alacritty unstable.sublime4 sublime-merge ];
+
+  system-prog-langs = with pkgs; [ python3 nodejs ];
+  games = with pkgs; [ minecraft ];
+
+  de-clis = with pkgs; [ wmctrl xdotool play-with-mpv xsel ];
+  media-clis = with pkgs; [ mpc_cli mpd mpdris2 ncmpcpp ffmpeg imagemagick ];
+  system-clis = with pkgs; [ aria2 bat curl fzf git ripgrep tmux wget zsh ];
+  system-tuis = with pkgs; [ htop lazygit ranger ueberzug ];
+
+  archive-utils = with pkgs; [ unrar p7zip unzip ark ];
+  virt-utils = with pkgs; [ libvirt virt-manager podman appimage-run ];
+  kde-support = with pkgs; [
+    kwallet-pam
+    plasma-browser-integration
+    libnotify
+    libappindicator-gtk3
+    plasma5Packages.kio-extras
+    gnome.adwaita-icon-theme
+  ];
 in
 {
   ### Local config files ###
@@ -20,98 +45,25 @@ in
 
   config = lib.mkMerge [{
     ### Packages ###
-    environment.systemPackages = with pkgs; [
-      # web
-      chromium
-      tdesktop
-      thunderbird
-      birdtray
-      teams
-      # office
-      libreoffice
-      lyx
-      # gui devtools
-      alacritty
-      grpcui
-      # game
-      minecraft
-      # Sublime 
-      unstable.sublime4
-      sublime-merge
-
-      # cli system-wide tools
-      curl
-      fzf
-      git
-      htop
-      lazygit
-      p7zip
-      ripgrep
-      wget
-      zsh
-      aria2
-      tmux
-      python3
-      nodejs
-      unzip
-      bat
-
-      # terminal file manager
-      ranger
-      ueberzug
-
-      # desktop utilities
-      wmctrl
-      xdotool
-      play-with-mpv
-      xsel
-
-      # kde utilities
-      kwallet-pam
-      plasma-browser-integration
-      libnotify
-      ark
-      unrar
-      libappindicator-gtk3
-      plasma5Packages.kio-extras
-
-      # media
-      mpc_cli
-      mpd
-      mpdris2
-      mpv
-      ncmpcpp
-      ffmpeg
-      imagemagick
-      zathura
-      gimp
-      unstable.musescore
-      feh
-
-      # sync
-      syncthing
-
-      # texlive
-      texlive.combined.scheme-full
-
-      # theme gtk apps properly
-      gnome.adwaita-icon-theme
-
-      # virtualization & container
-      libvirt
-      virt-manager
-      podman
-      appimage-run
-
-      # for lorri
-      direnv
-
-      # customized vim
-      my-neovim
-      (unstable.neovim-qt.override {
-        neovim = my-neovim;
-      })
-    ];
+    environment.systemPackages = builtins.concatLists [
+      web-gui-apps
+      office-gui-apps
+      dev-gui-apps
+      games
+      system-clis
+      system-tuis
+      system-prog-langs
+      de-clis
+      kde-support
+      archive-utils
+      media-gui-apps
+    ] ++ (with pkgs;
+      [
+        texlive.combined.scheme-full
+        syncthing
+        direnv
+        my-neovim
+      ]);
 
     # Font packages
     fonts.fonts = with pkgs; [
