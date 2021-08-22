@@ -43,6 +43,8 @@ in
   ];
 
   config = lib.mkMerge [{
+    nixpkgs.config.allowUnfree = true;
+
     ### Packages ###
     environment.systemPackages = builtins.concatLists [
       web-gui-apps
@@ -72,21 +74,6 @@ in
       source-han-serif
       fira-code
       fira-mono
-    ];
-
-    # Allow some nonfree packages
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "minecraft-launcher"
-      "unrar"
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-      "cudatoolkit"
-      "libtorch"
-      "pytorch"
-      "teams"
-      "sublime-merge"
-      "unzip"
     ];
 
     ### Basics ###
