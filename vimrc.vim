@@ -50,6 +50,7 @@ call UpdateLspExecutablePathsF()
 call coc#config('rust-analyzer.diagnostics.disabled', ['macro-error'])
 call coc#config('rust-analyzer.cargo.loadOutDirsFromCheck', 1)
 call coc#config('rust-analyzer.procMacro.enable', 1)
+call coc#config('rust-analyzer.inlayHints.enable', 0)
 
 " nix lsp
 call coc#config('languageserver.nix', { 'command': 'rnix-lsp', 'filetypes': ['nix'] })
