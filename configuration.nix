@@ -1,9 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   # to add nixos-unstable channel:
   # nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
   # nix-channel --update
+  pkgs = import <nixos> { config.allowUnfree = true; };
   unstable = import <nixos-unstable> { config.allowUnfree = true; };
   my-neovim = import ./neovim.nix { pkgs = unstable; };
 
