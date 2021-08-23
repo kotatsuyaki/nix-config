@@ -58,6 +58,8 @@ call coc#config('languageserver.nix', { 'command': 'rnix-lsp', 'filetypes': ['ni
 " Enable format-on-save for all filetypes
 call coc#config('coc.preferences', {'formatOnSaveFiletypes': ['*']})
 
+" disable coc semantic highlighting
+call coc#config('coc.preferences.semanticTokensHighlights', 0)
 " Recommended settings according to barbar
 let bufferline = get(g:, 'bufferline', {})
 let bufferline.icons = 'numbers'
