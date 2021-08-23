@@ -131,6 +131,10 @@ in
       '';
     };
 
+    ### Shell ###
+    programs.zsh.enable = true;
+    programs.zsh.enableCompletion = true;
+
     ### User ###
     users.users.akitaki = {
       isNormalUser = true;
