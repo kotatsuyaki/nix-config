@@ -12,7 +12,7 @@ let
   web-gui-apps = with pkgs; [ chromium tdesktop thunderbird birdtray teams ];
   office-gui-apps = with pkgs; [ libreoffice lyx ];
   media-gui-apps = with pkgs; [ unstable.musescore zathura mpv gimp feh ];
-  dev-gui-apps = with pkgs; [ alacritty unstable.sublime4 sublime-merge ];
+  dev-gui-apps = with pkgs; [ wezterm unstable.sublime4 sublime-merge ];
   games = with pkgs; [ minecraft ];
   gui-pkgs = builtins.concatLists [ web-gui-apps office-gui-apps media-clis dev-gui-apps games ];
 
