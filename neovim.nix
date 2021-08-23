@@ -43,6 +43,8 @@ in
         which-key-nvim
         indent-blankline-nvim-lua
         editorconfig-vim
+        vim-rooter
+        direnv-vim
         # Intellisense
         coc-nvim
         coc-rust-analyzer

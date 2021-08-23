@@ -32,10 +32,19 @@ filet plugin indent on
 " Setup git gutter
 lua require('gitsigns').setup()
 
-" Project-specific rust-analyzer path (to avoid installing it globally)
-if executable('rust-analyzer')
-    call coc#config('rust-analyzer', {'server': {'path': trim(system('which rust-analyzer'))}})
-endif
+command UpdateLspExecutablePaths call UpdateLspExecutablePathsF() | execute 'CocRestart'
+
+" Project-specific binary paths
+function UpdateLspExecutablePathsF()
+    if executable('rust-analyzer')
+        call coc#config('rust-analyzer', {'server': {'path': trim(system('which rust-analyzer'))}})
+    endif
+    if executable('TabNine')
+        call coc#config('tabnine.binary_path', trim(system('which TabNine')))
+    endif
+endfunction
+
+call UpdateLspExecutablePathsF()
 
 " Disable macro-error for rust, since it produces spurious errors
 call coc#config('rust-analyzer.diagnostics.disabled', ['macro-error'])
@@ -44,11 +53,6 @@ call coc#config('rust-analyzer.procMacro.enable', 1)
 
 " nix lsp
 call coc#config('languageserver.nix', { 'command': 'rnix-lsp', 'filetypes': ['nix'] })
-
-" Project-specific tabnine path
-if executable('TabNine')
-    call coc#config('tabnine.binary_path', trim(system('which TabNine')))
-endif
 
 " Enable format-on-save for all filetypes
 call coc#config('coc.preferences', {'formatOnSaveFiletypes': ['*']})
