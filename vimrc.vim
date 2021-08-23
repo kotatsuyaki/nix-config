@@ -1,7 +1,7 @@
 colo edge
 set guifont=Fira\ Code\ Medium:h17
 set termguicolors bg=light
-set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4
+set et is si ai rnu hls hidden mouse=a ts=4 sts=4 sw=4 nowrap
 set clipboard=unnamed,unnamedplus
 set updatetime=100
 set nobackup nowritebackup
