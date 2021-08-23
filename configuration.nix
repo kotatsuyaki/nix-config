@@ -14,7 +14,7 @@ let
   media-gui-apps = with pkgs; [ unstable.musescore zathura mpv gimp feh ];
   dev-gui-apps = with pkgs; [ wezterm unstable.sublime4 sublime-merge ];
   games = with pkgs; [ minecraft ];
-  gui-pkgs = builtins.concatLists [ web-gui-apps office-gui-apps media-clis dev-gui-apps games ];
+  gui-pkgs = builtins.concatLists [ web-gui-apps office-gui-apps media-gui-apps dev-gui-apps games ];
 
   de-clis = with pkgs; [ wmctrl xdotool play-with-mpv xsel ];
   media-clis = with pkgs; [ mpc_cli mpd mpdris2 ncmpcpp ffmpeg imagemagick ];
