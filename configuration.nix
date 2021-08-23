@@ -7,12 +7,18 @@ let
   pkgs = import <nixos> { config.allowUnfree = true; };
   unstable = import <nixos-unstable> { config.allowUnfree = true; };
   my-neovim = import ./neovim.nix { pkgs = unstable; };
+  wez-neovim = pkgs.makeDesktopItem {
+    name = "wez-neovim";
+    desktopName = "Neovim in Wezterm";
+    exec = "wezterm start -- nvim %F";
+    terminal = "false";
+  };
 
   # lists of packages, divided into several categories
   web-gui-apps = with pkgs; [ chromium tdesktop thunderbird birdtray teams ];
   office-gui-apps = with pkgs; [ libreoffice lyx ];
   media-gui-apps = with pkgs; [ unstable.musescore zathura mpv gimp feh ];
-  dev-gui-apps = with pkgs; [ wezterm unstable.sublime4 sublime-merge ];
+  dev-gui-apps = with pkgs; [ wezterm wez-neovim unstable.sublime4 sublime-merge ];
   games = with pkgs; [ minecraft ];
   gui-pkgs = builtins.concatLists [ web-gui-apps office-gui-apps media-gui-apps dev-gui-apps games ];
 
