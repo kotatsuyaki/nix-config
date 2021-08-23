@@ -60,6 +60,7 @@ call coc#config('coc.preferences', {'formatOnSaveFiletypes': ['*']})
 
 " disable coc semantic highlighting
 call coc#config('coc.preferences.semanticTokensHighlights', 0)
+
 " Recommended settings according to barbar
 let bufferline = get(g:, 'bufferline', {})
 let bufferline.icons = 'numbers'
@@ -221,3 +222,5 @@ require('lualine').setup {
 }
 EOF
 
+" indent line color
+highlight IndentBlanklineChar guifg=#EEF1F4 gui=nocombine
