@@ -52,6 +52,7 @@ in
         coc-flutter
         coc-pairs
         coc-clangd
+        nvim-colorizer-lua
         # Git
         lazygit-nvim
         gitsigns-nvim
