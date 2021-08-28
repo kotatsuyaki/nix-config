@@ -44,6 +44,7 @@ in
         indent-blankline-nvim-lua
         editorconfig-vim
         vim-rooter
+        plenary-nvim
         direnv-vim
         # Intellisense
         coc-nvim
@@ -58,6 +59,7 @@ in
         # Git
         lazygit-nvim
         gitsigns-nvim
+        neogit
         # Files
         nvim-tree-lua
       ];

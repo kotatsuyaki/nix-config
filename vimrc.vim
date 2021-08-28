@@ -197,6 +197,12 @@ nnoremap <silent><nowait> <space>f  :<C-u>CocList files<CR>
 " colorizer
 lua require('colorizer').setup()
 
+" neogit
+lua require('neogit').setup()
+hi! link NeogitDiffContextHighlight CursorLine
+hi! link NeogitDiffDeleteHighlight agitDiffRemove
+hi! link NeogitDiffAddHighlight agitDiffAdd
+
 " lualine
 lua << EOF
 require('lualine').setup {
