@@ -56,6 +56,7 @@ in
         coc-pairs
         coc-clangd
         nvim-colorizer-lua
+        vista-vim
         # Git
         lazygit-nvim
         gitsigns-nvim
