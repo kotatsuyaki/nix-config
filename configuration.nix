@@ -75,6 +75,7 @@ in
       source-han-serif
       fira-code
       fira-mono
+      inconsolata-nerdfont
     ];
 
     ### Basics ###
