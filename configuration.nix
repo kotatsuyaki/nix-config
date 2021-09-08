@@ -159,6 +159,12 @@ in
       };
     };
 
+    ### System GC ###
+    nix.gc = {
+      dates = "03:00";
+      automatic = true;
+    };
+
     ### Virtualisation
     virtualisation = {
       libvirtd.enable = true;
