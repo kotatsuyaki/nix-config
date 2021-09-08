@@ -24,7 +24,7 @@ let
 
   de-clis = with pkgs; [ wmctrl xdotool play-with-mpv xsel ];
   media-clis = with pkgs; [ mpc_cli mpd mpdris2 ncmpcpp ffmpeg imagemagick ];
-  system-clis = with pkgs; [ aria2 bat curl fzf git ripgrep tmux wget zsh ];
+  system-clis = with pkgs; [ aria2 bat curl fzf git ripgrep tmux wget zsh tealdeer ];
   system-tuis = with pkgs; [ htop lazygit ranger ueberzug my-neovim ];
   cli-pkgs = builtins.concatLists [ de-clis media-clis system-clis system-tuis ];
 
