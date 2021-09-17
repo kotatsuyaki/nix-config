@@ -3,6 +3,7 @@
 let
   kommentary = pkgs.vimUtils.buildVimPlugin {
     name = "kommentary";
+    pname = "kommentary";
     src = pkgs.fetchFromGitHub {
       owner = "b3nj5m1n";
       repo = "kommentary";
@@ -12,6 +13,7 @@ let
   };
   coc-flutter = pkgs.vimUtils.buildVimPlugin {
     name = "coc-flutter";
+    pname = "coc-flutter";
     src = pkgs.fetchFromGitHub {
       owner = "iamcco";
       repo = "coc-flutter";
