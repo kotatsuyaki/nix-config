@@ -6,7 +6,7 @@ let
   # nix-channel --update
   pkgs = import <nixos> { config.allowUnfree = true; };
   unstable = import <nixos-unstable> { config.allowUnfree = true; };
-  my-neovim = import ./neovim.nix { pkgs = unstable; };
+  my-neovim = import ./neovim.nix { pkgs = unstable; stable = pkgs; };
   wez-neovim = pkgs.makeDesktopItem {
     name = "wez-neovim";
     desktopName = "Neovim in Wezterm";
