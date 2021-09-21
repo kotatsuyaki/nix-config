@@ -230,3 +230,6 @@ EOF
 
 " indent line color
 highlight IndentBlanklineChar guifg=#EEF1F4 gui=nocombine
+
+" Markdown frontmatter
+let g:vim_markdown_toml_frontmatter = 1
