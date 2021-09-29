@@ -42,6 +42,9 @@ function UpdateLspExecutablePathsF()
     if executable('TabNine')
         call coc#config('tabnine.binary_path', trim(system('which TabNine')))
     endif
+    if executable('svls')
+        call coc#config('languageserver.svls', {'command': 'svls', 'filetypes': ['systemverilog']})
+    endif
 endfunction
 
 call UpdateLspExecutablePathsF()
@@ -196,12 +199,6 @@ nnoremap <silent><nowait> <space>f  :<C-u>CocList files<CR>
 
 " colorizer
 lua require('colorizer').setup()
-
-" neogit
-lua require('neogit').setup()
-hi! link NeogitDiffContextHighlight CursorLine
-hi! link NeogitDiffDeleteHighlight agitDiffRemove
-hi! link NeogitDiffAddHighlight agitDiffAdd
 
 " lualine
 lua << EOF

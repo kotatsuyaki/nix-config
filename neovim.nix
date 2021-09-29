@@ -1,7 +1,7 @@
-{ pkgs, stable }:
+{ pkgs }:
 
 let
-  kommentary = stable.vimUtils.buildVimPlugin {
+  kommentary = pkgs.vimUtils.buildVimPlugin {
     name = "kommentary";
     pname = "kommentary";
     src = pkgs.fetchFromGitHub {
@@ -11,7 +11,7 @@ let
       sha256 = "06shsdv92ykf3zx33a7v4xlqfi6jwdpvv9j6hx4n6alk4db02kgd";
     };
   };
-  coc-flutter = stable.vimUtils.buildVimPlugin {
+  coc-flutter = pkgs.vimUtils.buildVimPlugin {
     name = "coc-flutter";
     pname = "coc-flutter";
     src = pkgs.fetchFromGitHub {
@@ -27,43 +27,45 @@ in
   vimAlias = true;
   configure = {
     customRC = builtins.readFile ./vimrc.vim;
-    plug.plugins = with stable.vimPlugins; [
-      # Appearance
-      edge
-      barbar-nvim
-      lualine-nvim
-      # Languages
-      vim-nix
-      dart-vim-plugin
-      vim-toml
-      vim-markdown
-      rust-vim
-      # Basics
-      vim-surround
-      kommentary
-      which-key-nvim
-      indent-blankline-nvim-lua
-      editorconfig-vim
-      vim-rooter
-      plenary-nvim
-      direnv-vim
-      # Intellisense
-      coc-nvim
-      coc-rust-analyzer
-      coc-lists
-      coc-pyright
-      coc-tabnine
-      coc-flutter
-      coc-pairs
-      coc-clangd
-      nvim-colorizer-lua
-      vista-vim
-      # Git
-      lazygit-nvim
-      gitsigns-nvim
-      neogit
-      # Files
-      nvim-tree-lua
-    ];
+    packages.myVimPackage = {
+      start = with pkgs.vimPlugins; [
+        # Appearance
+        edge
+        barbar-nvim
+        lualine-nvim
+        # Languages
+        vim-nix
+        dart-vim-plugin
+        vim-toml
+        vim-markdown
+        rust-vim
+        # Basics
+        vim-surround
+        kommentary
+        which-key-nvim
+        indent-blankline-nvim-lua
+        editorconfig-vim
+        vim-rooter
+        plenary-nvim
+        direnv-vim
+        # Intellisense
+        coc-nvim
+        coc-rust-analyzer
+        coc-lists
+        coc-pyright
+        coc-tabnine
+        coc-flutter
+        coc-pairs
+        coc-clangd
+        nvim-colorizer-lua
+        vista-vim
+        # Git
+        lazygit-nvim
+        gitsigns-nvim
+        # Files
+        nvim-tree-lua
+      ];
+      opt = [ ];
+    };
   };
 })
