@@ -45,6 +45,9 @@ function UpdateLspExecutablePathsF()
     if executable('svls')
         call coc#config('languageserver.svls', {'command': 'svls', 'filetypes': ['systemverilog']})
     endif
+    if executable('texlab')
+        call coc#config('texlab', {'path': trim(system('which texlab'))})
+    endif
 endfunction
 
 call UpdateLspExecutablePathsF()
