@@ -57,6 +57,7 @@ in
         coc-flutter
         coc-pairs
         coc-clangd
+        coc-texlab
         nvim-colorizer-lua
         vista-vim
         # Git
