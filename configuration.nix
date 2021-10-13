@@ -107,6 +107,7 @@ in
     services.xserver.libinput.enable = true;
     # Printers
     services.printing.enable = true;
+    services.printing.drivers = [ pkgs.hplip ];
     # Audio
     hardware.pulseaudio.enable = true;
     sound.enable = true;
