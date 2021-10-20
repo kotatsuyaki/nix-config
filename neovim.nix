@@ -41,6 +41,7 @@ in
         rust-vim
         # Basics
         vim-surround
+        easy-align
         kommentary
         which-key-nvim
         indent-blankline-nvim-lua

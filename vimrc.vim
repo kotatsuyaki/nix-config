@@ -233,3 +233,7 @@ highlight IndentBlanklineChar guifg=#EEF1F4 gui=nocombine
 
 " Markdown frontmatter
 let g:vim_markdown_toml_frontmatter = 1
+
+" easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
