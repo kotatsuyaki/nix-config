@@ -111,6 +111,9 @@ function config_keymaps()
 
     -- fzf
     map {'n', '<space>d', ':DocumentSymbols<cr>'}
+
+    -- run lazygit
+    map {'n', '<leader>gg', ':LazyGit<cr>'}
 end
 config_keymaps()
 
