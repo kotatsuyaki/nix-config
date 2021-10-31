@@ -245,13 +245,19 @@ require('lualine').setup {
 }
 
 -- auto close brackets
-require('nvim-autopairs').setup{}
+function config_autopairs()
+    require('nvim-autopairs').setup {}
+end
+config_autopairs()
 
 -- syntax highlights
 require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,
-    }
+    },
+    indent = {
+        enable = true,
+    },
 }
 
 require('surround').setup {
@@ -262,14 +268,12 @@ require('surround').setup {
 function config_cmp()
     -- Setup nvim-cmp.
     local cmp = require('cmp')
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
     cmp.setup({
       snippet = {
         expand = function(args)
-          -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-          -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+          require('luasnip').lsp_expand(args.body)
         end,
       },
       mapping = {
@@ -282,7 +286,10 @@ function config_cmp()
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true
+        }),
       },
       sources = {
         { name = 'nvim_lsp' },
@@ -290,7 +297,18 @@ function config_cmp()
         { name = 'luasnip' },
         { name = 'path' },
       },
+
+      --[[ event = {
+        on_confirm_done = cmp_autopairs.on_confirm_done
+      }, ]]
     })
+
+    cmp_autopairs.setup {
+        map_cr = true,
+        map_complete = true,
+        auto_select = true,
+        insert = false,
+    }
 end
 config_cmp()
 
