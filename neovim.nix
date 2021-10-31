@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs ? import <nixos-unstable> {} }:
 
 let
   makePlugin = { name, path, preConfigure ? "" }: pkgs.vimUtils.buildVimPlugin {
@@ -30,7 +30,7 @@ in
         nvim-colorizer-lua
 
         # Language syntax
-        (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+        nvim-treesitter
 
         # Editing support
 	    kommentary
