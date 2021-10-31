@@ -99,7 +99,7 @@ function config_keymaps()
     map {'n', '<space>a', ':Trouble<cr>'}
 
     -- code actions window by space-h
-    map {'n', '<space>h', ':CodeActionMenu'}
+    map {'n', '<space>h', ':CodeActionMenu<cr>'}
 
     -- buffer management
     map {'n', ']b', ':BufferLineCycleNext<cr>'}
