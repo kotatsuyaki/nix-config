@@ -1,5 +1,5 @@
 function config_builtin_options()
-    options = {
+    local options = {
         guifont = 'Fira Code Medium:h17',
         bg = 'light',
         clipboard ='unnamed,unnamedplus',
@@ -20,7 +20,7 @@ function config_builtin_options()
         vim.opt[key] = value
     end
 
-    enable_options = {
+    local enable_options = {
         'et',
         'is',
         'si',
@@ -37,7 +37,7 @@ function config_builtin_options()
         vim.opt[enable_options[i]] = true
     end
 
-    disable_options = {
+    local disable_options = {
         'backup',
         'writebackup',
     }
@@ -98,8 +98,8 @@ function config_keymaps()
     -- space-a to open diags list
     map {'n', '<space>a', ':Trouble<cr>'}
 
-    -- code actions window by space-f
-    map {'n', '<space>f', ':CodeActionMenu'}
+    -- code actions window by space-h
+    map {'n', '<space>h', ':CodeActionMenu'}
 
     -- buffer management
     map {'n', ']b', ':BufferLineCycleNext<cr>'}
@@ -111,6 +111,7 @@ function config_keymaps()
 
     -- fzf
     map {'n', '<space>d', ':DocumentSymbols<cr>'}
+    map {'n', '<space>f', ':DocumentSymbols<cr>'}
 
     -- run lazygit
     map {'n', '<leader>gg', ':LazyGit<cr>'}
@@ -211,11 +212,13 @@ function lualine_vscode_light()
 end
 require('lualine').setup {
     sections = {
+        -- left half
         lualine_a = {'mode'},
         lualine_b = {
             'branch',
             {
                 'diff',
+                -- custom diff colors
                 diff_color = {
                     added = { fg = '#1a8a16' },
                     modified = { fg = '#9231ad' },
@@ -228,6 +231,10 @@ require('lualine').setup {
             }
         },
         lualine_c = {'filename'},
+        -- right half
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
     },
     options = {
         icons_enabled = false,
@@ -363,15 +370,32 @@ function config_lsp()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
     
-    local servers = { 'pyright', 'rust_analyzer', 'clangd' }
-    for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {
+    local name_options = function(server)
+        local name = ''
+        local options = {
             on_attach = on_attach,
             flags = {
                 debounce_text_changes = 150,
             },
             capabilities = capabilities,
         }
+
+        if type(server) == 'string' then
+            name = server
+        else
+            name = server[1]
+            options.cmd = { server[2] }
+        end
+        return name, options
+    end
+    local servers = {
+        'pyright', 'rust_analyzer', 'clangd',
+        {'sumneko_lua', 'lua-language-server'},
+    }
+
+    for _, server in ipairs(servers) do
+        local name, options = name_options(server)
+        nvim_lsp[name].setup(options)
     end
 end
 config_lsp()
