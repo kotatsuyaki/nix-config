@@ -365,11 +365,11 @@ function config_lsp()
         buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     end
     
-    local lsp = require "lspconfig"
+    local lsp = require("lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-    
+    -- helper to explode lsp server options
     local name_options = function(server)
         local name = ''
         local options = {
@@ -383,16 +383,39 @@ function config_lsp()
         if type(server) == 'string' then
             name = server
         else
-            name = server[1]
-            options.cmd = { server[2] }
+            -- use first element as the name, and the rest as options
+            for key, value in pairs(server) do
+                if key == 1 then
+                    name = value
+                else
+                    options[key] = value
+                end
+            end
         end
         return name, options
     end
+
+    -- lsp server options
     local servers = {
         'pyright', 'rust_analyzer', 'clangd',
-        {'sumneko_lua', 'lua-language-server'},
+        -- Lua
+        {
+            'sumneko_lua',
+            cmd = { 'lua-language-server' },
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = {'vim'},
+                    },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file('', true),
+                    },
+                },
+            },
+        },
     }
 
+    -- setup servers
     for _, server in ipairs(servers) do
         local name, options = name_options(server)
         nvim_lsp[name].setup(options)
