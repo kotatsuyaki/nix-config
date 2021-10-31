@@ -191,8 +191,9 @@ function lualine_vscode_light()
     local black = '#111111'
     local white = '#eeeeee'
     local grey = '#dddddd'
-    local green = '#B5CEA8'
+    local green = '#8BBD73'
 
+    -- the theme was originally dark, we change some colors here
     theme.normal.b.bg = grey
     theme.normal.c.bg = white
     theme.normal.c.fg = black
@@ -209,6 +210,25 @@ function lualine_vscode_light()
     return theme
 end
 require('lualine').setup {
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {
+            'branch',
+            {
+                'diff',
+                diff_color = {
+                    added = { fg = '#1a8a16' },
+                    modified = { fg = '#9231ad' },
+                    removed = { fg = '#C72E0F' },
+                },
+            },
+            {
+                'diagnostics',
+                sources={'nvim_lsp'}
+            }
+        },
+        lualine_c = {'filename'},
+    },
     options = {
         icons_enabled = false,
         component_separators = '',
