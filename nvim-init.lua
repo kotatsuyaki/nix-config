@@ -115,6 +115,10 @@ function config_keymaps()
 
     -- run lazygit
     map {'n', '<leader>gg', ':LazyGit<cr>'}
+
+    -- next/prev error
+    map {'n', ']e', 'lua vim.lsp.diagnostic.goto_next()<cr>'}
+    map {'n', '[e', 'lua vim.lsp.diagnostic.goto_prev()<cr>'}
 end
 config_keymaps()
 
@@ -243,6 +247,12 @@ require('lualine').setup {
         theme = lualine_vscode_light(),
     },
 }
+
+-- git gutter
+function config_gitsign()
+    require('gitsigns').setup()
+end
+config_gitsign()
 
 -- auto close brackets
 function config_autopairs()
