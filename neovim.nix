@@ -1,71 +1,67 @@
-{ pkgs }:
+{ pkgs ? import <nixos-unstable> { } }:
 
 let
-  kommentary = pkgs.vimUtils.buildVimPlugin {
-    name = "kommentary";
-    pname = "kommentary";
-    src = pkgs.fetchFromGitHub {
-      owner = "b3nj5m1n";
-      repo = "kommentary";
-      rev = "fe01018a490813a8d89c09947a7ca23fc0e9e728";
-      sha256 = "06shsdv92ykf3zx33a7v4xlqfi6jwdpvv9j6hx4n6alk4db02kgd";
-    };
+  makePlugin = { name, path, preConfigure ? "" }: pkgs.vimUtils.buildVimPlugin {
+    name = name;
+    pname = name;
+    src = import path;
+    preConfigure = preConfigure;
   };
-  coc-flutter = pkgs.vimUtils.buildVimPlugin {
-    name = "coc-flutter";
-    pname = "coc-flutter";
-    src = pkgs.fetchFromGitHub {
-      owner = "iamcco";
-      repo = "coc-flutter";
-      rev = "650b7789e15db58c69963196b9b17b560f7fd94b";
-      sha256 = "1mzgls3yrpvdxzkby3l4yc2yja63vph7lnsq31qgb1ap448xv231";
-    };
-  };
+  surround-nvim = makePlugin { name = "surround-nvim"; path = ./nvim-plugins/surround.nvim.nix; };
+  vscode-nvim = makePlugin { name = "vscode-nvim"; path = ./nvim-plugins/vscode.nvim.nix; };
+  cmp-nvim-lsp = makePlugin { name = "cmp-nvim-lsp"; path = ./nvim-plugins/cmp-nvim-lsp.nix; };
+  nvim-code-action-menu = makePlugin { name = "nvim-code-action-menu"; path = ./nvim-plugins/nvim-code-action-menu.nix; };
 in
 (pkgs.neovim.override {
   viAlias = true;
   vimAlias = true;
   configure = {
-    customRC = builtins.readFile ./vimrc.vim;
+    customRC = ''
+      lua << EOF
+      ${builtins.readFile ./nvim-init.lua}
+      EOF
+    '';
     packages.myVimPackage = {
       start = with pkgs.vimPlugins; [
         # Appearance
-        edge
-        barbar-nvim
+        vscode-nvim
+        bufferline-nvim
         lualine-nvim
-        # Languages
-        vim-nix
-        dart-vim-plugin
-        vim-toml
-        vim-markdown
-        rust-vim
-        # Basics
-        vim-surround
-        easy-align
-        kommentary
-        which-key-nvim
-        indent-blankline-nvim-lua
-        editorconfig-vim
-        vim-rooter
-        plenary-nvim
-        direnv-vim
-        # Intellisense
-        coc-nvim
-        coc-rust-analyzer
-        coc-lists
-        coc-pyright
-        coc-tabnine
-        coc-flutter
-        coc-pairs
-        coc-clangd
-        coc-texlab
         nvim-colorizer-lua
-        vista-vim
+
+        # Language syntax
+        nvim-treesitter
+
+        # Editing support
+        kommentary
+        surround-nvim
+        editorconfig-vim
+        indent-blankline-nvim-lua
+        which-key-nvim
+        nvim-autopairs
+
         # Git
         lazygit-nvim
         gitsigns-nvim
-        # Files
-        nvim-tree-lua
+
+        #######
+        # LSP #
+        #######
+        nvim-lspconfig
+        # cmp
+        nvim-cmp
+        cmp-nvim-lsp
+        cmp_luasnip
+        cmp-path
+        luasnip
+        # diag
+        trouble-nvim
+        # help
+        lsp_signature-nvim
+        nvim-code-action-menu
+        # fuzzy search
+        fzf-lsp-nvim
+        fzf-vim
       ];
       opt = [ ];
     };
