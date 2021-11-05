@@ -54,19 +54,19 @@ config_builtin_options()
 function config_colors()
     -- colorscheme
     vim.g.vscode_style = 'light'
-    vim.cmd[[colo vscode]]
+    vim.cmd[[colo dawnfox]]
 
     -- make vertical lines less distracting
-    vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#EEF1F4 gui=nocombine')
-    vim.cmd('au VimEnter * highlight MatchParen guibg=#dddddd')
+    vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#cccccc gui=nocombine')
+    -- vim.cmd('au VimEnter * highlight MatchParen guibg=#cccccc')
 
     -- make errors hurt my eyes less
     -- wrong code highlight
-    vim.cmd('au VimEnter * highlight Error guifg=#A31515')
-    vim.cmd('au VimEnter * highlight LspDiagnosticsUnderlineError guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight Error guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight LspDiagnosticsUnderlineError guifg=#A31515')
     -- error messages
-    vim.cmd('au VimEnter * highlight LspDiagnosticsDefaultError guifg=#A31515')
-    vim.cmd('au VimEnter * highlight ErrorMsg guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight LspDiagnosticsDefaultError guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight ErrorMsg guifg=#A31515')
 end
 config_colors()
 

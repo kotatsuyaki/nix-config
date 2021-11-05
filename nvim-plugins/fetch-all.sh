@@ -15,6 +15,7 @@ prefetch blackCauldron7 surround.nvim
 prefetch Mofiqul vscode.nvim
 prefetch hrsh7th cmp-nvim-lsp
 prefetch weilbith nvim-code-action-menu
+prefetch EdenEast nightfox.nvim
 
 # prefetch rafcamlet nvim-luapad
 # prefetch ray-x navigator.lua
