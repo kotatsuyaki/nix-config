@@ -65,6 +65,12 @@ function config_colors()
     vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#cccccc gui=nocombine')
     -- vim.cmd('au VimEnter * highlight MatchParen guibg=#cccccc')
 
+    local colors = require('nightfox.colors').load('dayfox')
+    vim.cmd('au VimEnter * highlight DiagnosticSignError guifg=' .. colors.red)
+    vim.cmd('au VimEnter * highlight DiagnosticSignWarn guifg=' .. colors.yellow)
+    vim.cmd('au VimEnter * highlight DiagnosticSignHint guifg=' .. colors.blue)
+    vim.cmd('au VimEnter * highlight DiagnosticSignInfo guifg=' .. colors.green)
+
     -- make errors hurt my eyes less
     -- wrong code highlight
     -- vim.cmd('au VimEnter * highlight Error guifg=#A31515')
