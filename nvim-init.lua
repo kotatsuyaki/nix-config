@@ -135,6 +135,19 @@ config_keymaps()
 
 -- tabbar
 function config_tabbar()
+    local normal_visible = {
+        guifg = {attribute = "fg", highlight="normal"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+    local warn_visible = {
+        guifg = {attribute = "fg", highlight="LspDiagnosticsWarning"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+    local error_visible = {
+        guifg = {attribute = "fg", highlight="LspDiagnosticsError"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+
     require('bufferline').setup {
         options = {
             indicator_icon = ' ',
@@ -185,15 +198,17 @@ function config_tabbar()
                 guifg = {attribute = "fg", highlight = "Normal"},
                 guibg = {attribute = "bg", highlight = "StatusLine"}
             },
-            close_button_selected = {
-                guifg = {attribute = "fg", highlight="normal"},
-                guibg = {attribute = "bg", highlight = "normal"}
-            },
-            close_button_visible = {
-                guifg = {attribute = "fg", highlight="normal"},
-                guibg = {attribute = "bg", highlight = "normal"}
-            },
-
+            close_button_selected = normal_visible,
+            close_button_visible = normal_visible,
+            modified_visible = normal_visible,
+            -- diagnostics
+            diagnostic_visible = normal_visible,
+            info_visible = normal_visible,
+            info_diagnostic_visible = normal_visible,
+            warning_visible = warn_visible,
+            warning_diagnostic_visible = warn_visible,
+            error_visible = error_visible,
+            error_diagnostic_visible = error_visible,
         }
     }
 end
