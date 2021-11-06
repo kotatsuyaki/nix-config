@@ -4,7 +4,6 @@ function config_builtin_options()
         bg = 'light',
         clipboard ='unnamed,unnamedplus',
         completeopt = 'menu,menuone,noselect',
-        updatetime = 100,
         encoding = 'utf-8',
         cmdheight = 2,
         updatetime = 300,
@@ -53,8 +52,14 @@ config_builtin_options()
 
 function config_colors()
     -- colorscheme
-    vim.g.vscode_style = 'light'
-    vim.cmd[[colo dawnfox]]
+    local nightfox = require('nightfox')
+    nightfox.setup {
+        fox = 'dayfox',
+        colors = {
+            bg = '#F6F6F6',
+        },
+    }
+    nightfox.load()
 
     -- make vertical lines less distracting
     vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#cccccc gui=nocombine')
@@ -191,28 +196,25 @@ end
 config_tabbar()
 
 -- status bar (with custom theme)
-function lualine_vscode_light()
-    local theme = require('lualine.themes.vscode')
-    local black = '#111111'
-    local white = '#eeeeee'
-    local grey = '#dddddd'
-    local green = '#8BBD73'
-
-    -- the theme was originally dark, we change some colors here
-    theme.normal.b.bg = grey
-    theme.normal.c.bg = white
-    theme.normal.c.fg = black
-
-    theme.visual.a.fg = white
-    theme.visual.b.bg = grey
-    
-    theme.insert.a.bg = green
-    theme.insert.b.fg = black
-    theme.insert.b.bg = grey
-    theme.insert.c.bg = white
-    theme.insert.c.fg = black
-
-    return theme
+function lualine_dayfox()
+    local colors = require('nightfox.colors').load('dayfox')
+    local lualine_theme = require('lualine.themes.nightfox')
+    -- normal
+    lualine_theme.normal.a.fg = colors.white
+    lualine_theme.normal.b.bg = colors.bg_highlight
+    -- insert
+    lualine_theme.insert.a.fg = colors.white
+    lualine_theme.insert.b.bg = colors.bg_highlight
+    -- command
+    lualine_theme.command.a.fg = colors.white
+    lualine_theme.command.b.bg = colors.bg_highlight
+    -- visual
+    lualine_theme.visual.a.fg = colors.white
+    lualine_theme.visual.b.bg = colors.bg_highlight
+    -- replace
+    lualine_theme.replace.a.fg = colors.white
+    lualine_theme.replace.b.bg = colors.bg_highlight
+    return lualine_theme
 end
 require('lualine').setup {
     sections = {
@@ -244,7 +246,7 @@ require('lualine').setup {
         icons_enabled = false,
         component_separators = '',
         section_separators = '',
-        theme = lualine_vscode_light(),
+        theme = lualine_dayfox(),
     },
 }
 
@@ -425,7 +427,19 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'rust_analyzer', 'clangd',
+        'pyright', 'clangd',
+        {
+            -- the lspconfig's names doesn't contain dashes
+            'rust_analyzer',
+            cmd = { 'rust-analyzer' },
+            settings = {
+                ['rust-analyzer'] = {
+                    procMacro = {
+                        enable = true,
+                    },
+                }
+            },
+        },
         -- Lua
         {
             'sumneko_lua',
