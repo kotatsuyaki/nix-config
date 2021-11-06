@@ -147,8 +147,6 @@ function config_tabbar()
             right_trunc_marker = '',
             show_tab_indicators = true,
             show_close_icon = false,
-            -- disable icons
-            show_buffer_icons = false,
             -- show diags
             diagnostics = "nvim_lsp",
         },

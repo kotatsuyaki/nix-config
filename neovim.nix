@@ -30,6 +30,7 @@ in
         bufferline-nvim
         lualine-nvim
         nvim-colorizer-lua
+        nvim-web-devicons
 
         # Language syntax
         nvim-treesitter
