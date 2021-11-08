@@ -4,7 +4,6 @@ function config_builtin_options()
         bg = 'light',
         clipboard ='unnamed,unnamedplus',
         completeopt = 'menu,menuone,noselect',
-        updatetime = 100,
         encoding = 'utf-8',
         cmdheight = 2,
         updatetime = 300,
@@ -53,20 +52,32 @@ config_builtin_options()
 
 function config_colors()
     -- colorscheme
-    vim.g.vscode_style = 'light'
-    vim.cmd[[colo vscode]]
+    local nightfox = require('nightfox')
+    nightfox.setup {
+        fox = 'dayfox',
+        colors = {
+            bg = '#F6F6F6',
+        },
+    }
+    nightfox.load()
 
     -- make vertical lines less distracting
-    vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#EEF1F4 gui=nocombine')
-    vim.cmd('au VimEnter * highlight MatchParen guibg=#dddddd')
+    vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#cccccc gui=nocombine')
+    -- vim.cmd('au VimEnter * highlight MatchParen guibg=#cccccc')
+
+    local colors = require('nightfox.colors').load('dayfox')
+    vim.cmd('au VimEnter * highlight DiagnosticSignError guifg=' .. colors.red)
+    vim.cmd('au VimEnter * highlight DiagnosticSignWarn guifg=' .. colors.yellow)
+    vim.cmd('au VimEnter * highlight DiagnosticSignHint guifg=' .. colors.blue)
+    vim.cmd('au VimEnter * highlight DiagnosticSignInfo guifg=' .. colors.green)
 
     -- make errors hurt my eyes less
     -- wrong code highlight
-    vim.cmd('au VimEnter * highlight Error guifg=#A31515')
-    vim.cmd('au VimEnter * highlight LspDiagnosticsUnderlineError guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight Error guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight LspDiagnosticsUnderlineError guifg=#A31515')
     -- error messages
-    vim.cmd('au VimEnter * highlight LspDiagnosticsDefaultError guifg=#A31515')
-    vim.cmd('au VimEnter * highlight ErrorMsg guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight LspDiagnosticsDefaultError guifg=#A31515')
+    -- vim.cmd('au VimEnter * highlight ErrorMsg guifg=#A31515')
 end
 config_colors()
 
@@ -124,6 +135,19 @@ config_keymaps()
 
 -- tabbar
 function config_tabbar()
+    local normal_visible = {
+        guifg = {attribute = "fg", highlight="normal"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+    local warn_visible = {
+        guifg = {attribute = "fg", highlight="LspDiagnosticsWarning"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+    local error_visible = {
+        guifg = {attribute = "fg", highlight="LspDiagnosticsError"},
+        guibg = {attribute = "bg", highlight = "normal"}
+    }
+
     require('bufferline').setup {
         options = {
             indicator_icon = ' ',
@@ -136,8 +160,6 @@ function config_tabbar()
             right_trunc_marker = '',
             show_tab_indicators = true,
             show_close_icon = false,
-            -- disable icons
-            show_buffer_icons = false,
             -- show diags
             diagnostics = "nvim_lsp",
         },
@@ -176,43 +198,42 @@ function config_tabbar()
                 guifg = {attribute = "fg", highlight = "Normal"},
                 guibg = {attribute = "bg", highlight = "StatusLine"}
             },
-            close_button_selected = {
-                guifg = {attribute = "fg", highlight="normal"},
-                guibg = {attribute = "bg", highlight = "normal"}
-            },
-            close_button_visible = {
-                guifg = {attribute = "fg", highlight="normal"},
-                guibg = {attribute = "bg", highlight = "normal"}
-            },
-
+            close_button_selected = normal_visible,
+            close_button_visible = normal_visible,
+            modified_visible = normal_visible,
+            -- diagnostics
+            diagnostic_visible = normal_visible,
+            info_visible = normal_visible,
+            info_diagnostic_visible = normal_visible,
+            warning_visible = warn_visible,
+            warning_diagnostic_visible = warn_visible,
+            error_visible = error_visible,
+            error_diagnostic_visible = error_visible,
         }
     }
 end
 config_tabbar()
 
 -- status bar (with custom theme)
-function lualine_vscode_light()
-    local theme = require('lualine.themes.vscode')
-    local black = '#111111'
-    local white = '#eeeeee'
-    local grey = '#dddddd'
-    local green = '#8BBD73'
-
-    -- the theme was originally dark, we change some colors here
-    theme.normal.b.bg = grey
-    theme.normal.c.bg = white
-    theme.normal.c.fg = black
-
-    theme.visual.a.fg = white
-    theme.visual.b.bg = grey
-    
-    theme.insert.a.bg = green
-    theme.insert.b.fg = black
-    theme.insert.b.bg = grey
-    theme.insert.c.bg = white
-    theme.insert.c.fg = black
-
-    return theme
+function lualine_dayfox()
+    local colors = require('nightfox.colors').load('dayfox')
+    local lualine_theme = require('lualine.themes.nightfox')
+    -- normal
+    lualine_theme.normal.a.fg = colors.white
+    lualine_theme.normal.b.bg = colors.bg_highlight
+    -- insert
+    lualine_theme.insert.a.fg = colors.white
+    lualine_theme.insert.b.bg = colors.bg_highlight
+    -- command
+    lualine_theme.command.a.fg = colors.white
+    lualine_theme.command.b.bg = colors.bg_highlight
+    -- visual
+    lualine_theme.visual.a.fg = colors.white
+    lualine_theme.visual.b.bg = colors.bg_highlight
+    -- replace
+    lualine_theme.replace.a.fg = colors.white
+    lualine_theme.replace.b.bg = colors.bg_highlight
+    return lualine_theme
 end
 require('lualine').setup {
     sections = {
@@ -244,7 +265,7 @@ require('lualine').setup {
         icons_enabled = false,
         component_separators = '',
         section_separators = '',
-        theme = lualine_vscode_light(),
+        theme = lualine_dayfox(),
     },
 }
 
@@ -279,38 +300,59 @@ function config_cmp()
     -- Setup nvim-cmp.
     local cmp = require('cmp')
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local luasnip = require('luasnip')
+    local has_words_before = function()
+        local line, col = vim.api.nvim_win_get_cursor(0)
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
 
     cmp.setup({
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body)
-        end,
-      },
-      mapping = {
-        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable,
-        ['<C-e>'] = cmp.mapping({
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close(),
-        }),
-        ['<CR>'] = cmp.mapping.confirm({
+        snippet = {
+            expand = function(args)
+                require('luasnip').lsp_expand(args.body)
+            end,
+        },
+        mapping = {
+            -- supertab-like keymap
+            ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, { 'i', 's' }),
+            ['<S-Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                else
+                    fallback()
+                end
+            end, { 'i', 's' }),
+            ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+            ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+            ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+            ['<C-y>'] = cmp.config.disable,
+            ['<C-e>'] = cmp.mapping({
+                i = cmp.mapping.abort(),
+                c = cmp.mapping.close(),
+            }),
+            ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true
-        }),
-      },
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'buffer' },
-        { name = 'luasnip' },
-        { name = 'path' },
-      },
-
-      --[[ event = {
-        on_confirm_done = cmp_autopairs.on_confirm_done
-      }, ]]
+            }),
+        },
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'buffer' },
+            { name = 'luasnip' },
+            { name = 'path' },
+        },
     })
 
     cmp_autopairs.setup {
@@ -425,7 +467,19 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'rust_analyzer', 'clangd',
+        'pyright', 'clangd',
+        {
+            -- the lspconfig's names doesn't contain dashes
+            'rust_analyzer',
+            cmd = { 'rust-analyzer' },
+            settings = {
+                ['rust-analyzer'] = {
+                    procMacro = {
+                        enable = true,
+                    },
+                }
+            },
+        },
         -- Lua
         {
             'sumneko_lua',

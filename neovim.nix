@@ -11,6 +11,7 @@ let
   vscode-nvim = makePlugin { name = "vscode-nvim"; path = ./nvim-plugins/vscode.nvim.nix; };
   cmp-nvim-lsp = makePlugin { name = "cmp-nvim-lsp"; path = ./nvim-plugins/cmp-nvim-lsp.nix; };
   nvim-code-action-menu = makePlugin { name = "nvim-code-action-menu"; path = ./nvim-plugins/nvim-code-action-menu.nix; };
+  nightfox = makePlugin { name = "nightfox"; path = ./nvim-plugins/nightfox.nvim.nix; };
 in
 (pkgs.neovim.override {
   viAlias = true;
@@ -24,10 +25,12 @@ in
     packages.myVimPackage = {
       start = with pkgs.vimPlugins; [
         # Appearance
-        vscode-nvim
+        nightfox
+	    vscode-nvim
         bufferline-nvim
         lualine-nvim
         nvim-colorizer-lua
+        nvim-web-devicons
 
         # Language syntax
         nvim-treesitter
