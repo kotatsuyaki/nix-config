@@ -77,6 +77,7 @@ in
       fira-mono
       inconsolata-nerdfont
       iosevka-bin
+      corefonts
     ];
 
     ### Basics ###
