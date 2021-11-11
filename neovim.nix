@@ -34,6 +34,7 @@ in
 
         # Language syntax
         nvim-treesitter
+        vim-glsl
 
         # Editing support
         kommentary
