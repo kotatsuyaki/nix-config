@@ -475,6 +475,10 @@ function config_lsp()
     local servers = {
         'pyright', 'clangd', 'texlab',
         {
+            'dartls',
+            cmd = {'dart', 'language-server', '--client-version', '1.2'},
+        },
+        {
             'hls',
             cmd = { 'haskell-language-server', '--lsp' },
         },
