@@ -475,6 +475,10 @@ function config_lsp()
     local servers = {
         'pyright', 'clangd', 'texlab',
         {
+            'hls',
+            cmd = { 'haskell-language-server', '--lsp' },
+        },
+        {
             -- the lspconfig's names doesn't contain dashes
             'rust_analyzer',
             cmd = { 'rust-analyzer' },
