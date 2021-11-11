@@ -473,7 +473,7 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'clangd',
+        'pyright', 'clangd', 'texlab',
         {
             -- the lspconfig's names doesn't contain dashes
             'rust_analyzer',
