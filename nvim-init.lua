@@ -370,6 +370,12 @@ function config_format()
 end
 config_format()
 
+-- disable keymaps for latex
+function config_latex()
+    vim.cmd [[autocmd FileType latex unmap <leader>;]]
+    vim.cmd [[autocmd FileType latex iunmap <leader>;]]
+end
+config_latex()
 -- signature helper
 require "lsp_signature".setup {
     -- replace the panda emoji (why panda, why???)
