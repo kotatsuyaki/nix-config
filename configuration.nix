@@ -28,7 +28,7 @@ let
   system-tuis = with pkgs; [ htop lazygit ranger ueberzug my-neovim ];
   cli-pkgs = builtins.concatLists [ de-clis media-clis system-clis system-tuis ];
 
-  system-prog-langs = with pkgs; [ python3 nodejs ];
+  system-prog-langs = with pkgs; [ python3Full nodejs ];
   archive-utils = with pkgs; [ unrar p7zip unzip ark ];
   virt-utils = with pkgs; [ libvirt virt-manager podman appimage-run ];
   kde-support = with pkgs; [
