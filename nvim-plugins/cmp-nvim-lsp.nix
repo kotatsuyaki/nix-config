@@ -4,7 +4,7 @@ in
   pkgs.fetchFromGitHub {
     owner = "hrsh7th";
     repo = "cmp-nvim-lsp";
-    rev = "accbe6d97548d8d3471c04d512d36fa61d0e4be8";
-    sha256 = "1dqx6yrd60x9ncjnpja87wv5zgnij7qmzbyh5xfyslk67c0i6mwm";
+    rev = "134117299ff9e34adde30a735cd8ca9cf8f3db81";
+    sha256 = "1jnspl08ilz9ggkdddk0saxp3wzf05lll5msdfb4770q3bixddwc";
     fetchSubmodules = false;
   }
