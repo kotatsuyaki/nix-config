@@ -4,7 +4,7 @@ in
   pkgs.fetchFromGitHub {
     owner = "weilbith";
     repo = "nvim-code-action-menu";
-    rev = "32a02caf1cb6d5d31167945a2df9d371d68b1009";
-    sha256 = "1cpl29lz2c3fahrrz8lf9dccwy2iwdj4mn71xgn12kq3qarjijdv";
+    rev = "d3d059082eff3eb081167f8a232b1bde54bb2bdb";
+    sha256 = "0d7imklcz39ir53nr5kr0s826yqrwhrmr5p9iabs07hshyq3khgx";
     fetchSubmodules = false;
   }

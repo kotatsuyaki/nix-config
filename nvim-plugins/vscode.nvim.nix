@@ -4,7 +4,7 @@ in
   pkgs.fetchFromGitHub {
     owner = "Mofiqul";
     repo = "vscode.nvim";
-    rev = "98f5a42d7ccb9fbe83d5b5f8dbfb43e41dd2f476";
-    sha256 = "1k79zam9796k8zkqqy0ihhgsrxz376dgg7sd4l1x7li6z7frf98g";
+    rev = "00ff8f2a86e19f997f74bd8759552330b0c3b487";
+    sha256 = "0gsmssjik8hwpm255k2wynyvfghz04pray3ljd6iykqg85gcyx0j";
     fetchSubmodules = false;
   }
