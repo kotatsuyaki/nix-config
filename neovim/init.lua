@@ -343,8 +343,8 @@ function config_cmp()
                 c = cmp.mapping.close(),
             }),
             ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true
             }),
         },
         sources = {
@@ -366,7 +366,7 @@ config_cmp()
 
 -- auto format on save
 function config_format()
-    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting()]]
+    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 end
 config_format()
 
@@ -376,6 +376,7 @@ function config_latex()
     vim.cmd [[autocmd FileType latex iunmap <leader>;]]
 end
 config_latex()
+
 -- signature helper
 require "lsp_signature".setup {
     -- replace the panda emoji (why panda, why???)
