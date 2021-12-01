@@ -12,6 +12,5 @@
       enable = true;
       enableNvidia = true;
     };
-    waydroid.enable = true;
   };
 }
