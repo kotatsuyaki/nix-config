@@ -6,7 +6,6 @@
     wget
 
     # extractors
-    unrar
     p7zip
     unzip
 
