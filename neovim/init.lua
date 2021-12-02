@@ -291,11 +291,6 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
-require('surround').setup {
-    mappings_style = 'surround',
-    prefix = 'S',
-}
-
 function config_cmp()
     -- Setup nvim-cmp.
     local cmp = require('cmp')
