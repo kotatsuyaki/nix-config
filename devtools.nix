@@ -27,6 +27,7 @@
     tealdeer
     fzf
     bat
+    dnsutils
   ];
 
   # Set git commit --verbose as default
