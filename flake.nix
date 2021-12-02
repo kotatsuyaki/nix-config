@@ -56,9 +56,8 @@
         ./devtools.nix
         ./neovim
         ./misc.nix
-        ({ ... }: {
-          networking.firewall.enable = false;
-        })
+        (self.inputs.nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
+        ({ ... }: { networking.firewall.enable = false; })
       ];
     };
   };
