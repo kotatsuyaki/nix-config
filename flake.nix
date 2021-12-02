@@ -41,5 +41,25 @@
         ./virt.nix
       ];
     };
+
+    nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      extraArgs = {
+        inherit (self) inputs;
+      };
+      modules = [
+        ./ec2.nix
+        ./enable-flakes.nix
+        ./users.nix
+
+        # dev
+        ./devtools.nix
+        ./neovim
+        ./misc.nix
+        ({ ... }: {
+          networking.firewall.enable = false;
+        })
+      ];
+    };
   };
 }
