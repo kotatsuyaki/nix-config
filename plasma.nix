@@ -10,6 +10,9 @@
 
     plasma5Packages.bismuth
     gnome.gnome-keyring
+
+    # clipboard access from terminal
+    wl-clipboard
   ];
 
   # DE and touchpad
