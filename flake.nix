@@ -16,6 +16,7 @@
         ./fprintd.nix
         ./gc.nix
         ./users.nix
+        ./enable-flakes.nix
 
         # DE
         ./plasma.nix
@@ -38,16 +39,6 @@
         # ./ter-132n.nix
         ./tlp.nix
         ./virt.nix
-
-        # Enable flakes
-        ({ pkgs, ... }: {
-          nix = {
-            package = pkgs.nixFlakes;
-            extraOptions = ''
-              experimental-features = nix-command flakes
-            '';
-          };
-        })
       ];
     };
   };
