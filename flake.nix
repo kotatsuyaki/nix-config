@@ -39,7 +39,7 @@
         ./tlp.nix
         ./virt.nix
 
-# Enable flakes
+        # Enable flakes
         ({ pkgs, ... }: {
           nix = {
             package = pkgs.nixFlakes;
