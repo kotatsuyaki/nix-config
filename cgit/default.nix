@@ -1,6 +1,9 @@
 { pkgs, ... }:
 let
   port = 16160;
+  # use customized highlighter script,
+  # since the one shipped with cgit uses "pastie" theme,
+  # which renders nix files with weird background colors
   highlighter = pkgs.writers.writePython3Bin "highlighter" {
     libraries = [ pkgs.python3Packages.pygments ];
   } (builtins.readFile ./highlighter.py);
