@@ -57,7 +57,6 @@
         ./users.nix
         ./enable-flakes.nix
         ./ssh.nix
-        ./cgit.nix
 
         # DE
         ./plasma.nix
@@ -90,11 +89,13 @@
         ./ec2.nix
         ./enable-flakes.nix
         ./users.nix
+        ./ssh.nix
 
         # dev
         ./devtools.nix
         ./neovim
         ./misc.nix
+        ./cgit
         (self.inputs.nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
         ({ ... }: { networking.firewall.enable = false; })
       ];
