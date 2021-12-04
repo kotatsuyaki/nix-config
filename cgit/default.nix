@@ -20,6 +20,7 @@ in {
         source-filter=${highlighter}/bin/highlighter
         about-filter=${pkgs.cgit}/lib/cgit/filters/about-formatting.sh
         cache-size=1000
+        readme=:README.md
         root-title=code.akitaki.tk
         root-desc=Akitaki's personal repos
         scan-path=/var/lib/gitolite/repositories
