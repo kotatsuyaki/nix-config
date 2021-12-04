@@ -28,8 +28,23 @@ in {
     };
   };
 
-  # Grant access to the git directories
+  # read-only git-daemon
+  services.gitDaemon = {
+    enable = true;
+    basePath = "/var/lib/gitolite/repositories";
+    listenAddress = "0.0.0.0";
+    user = "gitdaemon";
+    group = "gitdaemon";
+  };
+
+  # Grant lighttpd access to the git directories
   users.users.lighttpd.extraGroups = [ "git" ];
+
+  # Grant gitdaemon access to the git directories
+  users.users.gitdaemon.extraGroups = [ "git" ];
+  users.users.gitdaemon.isSystemUser = true;
+  users.users.gitdaemon.group = "gitdaemon";
+  users.groups.gitdaemon = {};
 
   # gitolite server
   services.gitolite = {
