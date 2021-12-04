@@ -26,6 +26,8 @@ in {
       '';
     };
   };
+
+  # Grant access to the git directories
   users.users.lighttpd.extraGroups = [ "git" ];
 
   # gitolite server
