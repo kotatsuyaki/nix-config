@@ -469,7 +469,7 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'clangd', 'texlab',
+        'pyright', 'clangd', 'texlab', 'rnix',
         {
             'dartls',
             cmd = {'dart', 'language-server', '--client-version', '1.2'},
