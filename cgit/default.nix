@@ -7,6 +7,9 @@ let
   highlighter = pkgs.writers.writePython3Bin "highlighter" {
     libraries = [ pkgs.python3Packages.pygments ];
   } (builtins.readFile ./highlighter.py);
+  head-include-file = pkgs.writeText
+    "head-include"
+    (builtins.readFile ./head-include.html);
 in {
   # cgit server
   services.lighttpd = {
@@ -19,6 +22,7 @@ in {
       configText = ''
         source-filter=${highlighter}/bin/highlighter
         about-filter=${pkgs.cgit}/lib/cgit/filters/about-formatting.sh
+        head-include=${head-include-file}
         cache-size=0
         readme=:README.md
         root-title=code.akitaki.tk
