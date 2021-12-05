@@ -2,6 +2,15 @@
   description = "Flakes NixOS config for personal machines";
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
   outputs = { self, nixpkgs }: {
+    # For editing this repo
+    devShell.x86_64-linux =
+      let pkgs = nixpkgs.legacyPackages.x86_64-linux; in
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            rnix-lsp
+            nixpkgs-fmt
+          ];
+        };
     nixosConfigurations.x13 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
