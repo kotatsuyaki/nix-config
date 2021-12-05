@@ -68,6 +68,7 @@
         # dev
         ./devtools.nix
         ./neovim
+        ./direnv.nix
         ./xilinx.nix
 
         # media
