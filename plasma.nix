@@ -13,6 +13,9 @@
 
     # clipboard access from terminal
     wl-clipboard
+
+    # logitech
+    solaar
   ];
 
   # DE and touchpad
