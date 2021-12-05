@@ -19,7 +19,7 @@ in {
       configText = ''
         source-filter=${highlighter}/bin/highlighter
         about-filter=${pkgs.cgit}/lib/cgit/filters/about-formatting.sh
-        cache-size=1000
+        cache-size=0
         readme=:README.md
         root-title=code.akitaki.tk
         root-desc=Akitaki's personal repos
