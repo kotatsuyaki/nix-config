@@ -37,4 +37,7 @@
 
   # Firmware
   hardware.enableRedistributableFirmware = true;
+
+  # KDE Connect
+  programs.kdeconnect.enable = true;
 }
