@@ -301,6 +301,7 @@ function config_cmp()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' }}))
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -349,13 +350,6 @@ function config_cmp()
             { name = 'path' },
         },
     })
-
-    cmp_autopairs.setup {
-        map_cr = true,
-        map_complete = true,
-        auto_select = true,
-        insert = false,
-    }
 end
 config_cmp()
 
