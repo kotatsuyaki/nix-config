@@ -291,11 +291,6 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
-require('surround').setup {
-    mappings_style = 'surround',
-    prefix = 'S',
-}
-
 function config_cmp()
     -- Setup nvim-cmp.
     local cmp = require('cmp')
@@ -306,6 +301,7 @@ function config_cmp()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' }}))
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -343,8 +339,8 @@ function config_cmp()
                 c = cmp.mapping.close(),
             }),
             ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true
             }),
         },
         sources = {
@@ -354,19 +350,12 @@ function config_cmp()
             { name = 'path' },
         },
     })
-
-    cmp_autopairs.setup {
-        map_cr = true,
-        map_complete = true,
-        auto_select = true,
-        insert = false,
-    }
 end
 config_cmp()
 
 -- auto format on save
 function config_format()
-    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting()]]
+    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 end
 config_format()
 
@@ -376,6 +365,7 @@ function config_latex()
     vim.cmd [[autocmd FileType latex iunmap <leader>;]]
 end
 config_latex()
+
 -- signature helper
 require "lsp_signature".setup {
     -- replace the panda emoji (why panda, why???)
@@ -473,7 +463,7 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'clangd', 'texlab',
+        'pyright', 'clangd', 'texlab', 'rnix',
         {
             'dartls',
             cmd = {'dart', 'language-server', '--client-version', '1.2'},
