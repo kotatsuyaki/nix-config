@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+  ### MPD Client ###
+  environment.systemPackages = with pkgs; [
+    cantata
+  ];
+
   ### MPD ###
   hardware.pulseaudio.extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
   services.mpd = {
