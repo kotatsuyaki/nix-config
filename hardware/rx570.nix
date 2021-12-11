@@ -36,4 +36,5 @@
 
   swapDevices = [ ];
 
+  boot.tmpOnTmpfs = true;
 }
