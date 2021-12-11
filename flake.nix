@@ -69,6 +69,7 @@
               config.allowUnfree = true;
             };
           })
+          ./waydroid.nix
           ./hardware/rx570.nix
           ./boot.nix
           ./network.nix
