@@ -101,6 +101,45 @@
         ];
       };
 
+      nixosConfigurations.rtx3070 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ({
+            nixpkgs = {
+              config.allowUnfree = true;
+            };
+          })
+          ./hardware/rtx3070.nix
+          ./nvidia.nix
+          ./boot.nix
+          ./network.nix
+          ./gc.nix
+          ./users.nix
+          ./enable-flakes.nix
+          ./ssh.nix
+
+          # DE
+          ./plasma.nix
+          ./desktop-apps.nix
+          ./fonts.nix
+          ./sync.nix
+          ./localize.nix
+
+          # dev
+          ./devtools.nix
+          ./neovim
+          ./direnv.nix
+          ./xilinx.nix
+
+          # media
+          ./media.nix
+          ./misc.nix
+          ./mpd.nix
+
+          ./virt.nix
+        ];
+      };
+
       nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         extraArgs = {
