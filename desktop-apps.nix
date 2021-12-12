@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    wezterm
+    inputs.unstable.legacyPackages.x86_64-linux.wezterm
     chromium
     tdesktop
     teams
