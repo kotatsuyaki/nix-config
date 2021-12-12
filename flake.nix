@@ -1,9 +1,10 @@
 {
   description = "Flakes NixOS config for personal machines";
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
+  inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
   inputs.utils.url = github:numtide/flake-utils;
 
-  outputs = { self, nixpkgs, utils }:
+  outputs = { self, nixpkgs, unstable, utils }:
     let
       devShells = utils.lib.eachDefaultSystem
         (system:
@@ -22,6 +23,9 @@
     devShells // {
       nixosConfigurations.x13 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        extraArgs = {
+          inherit (self) inputs;
+        };
         modules = [
           ({
             nixpkgs = {
@@ -63,6 +67,9 @@
 
       nixosConfigurations.rx570 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        extraArgs = {
+          inherit (self) inputs;
+        };
         modules = [
           ({
             nixpkgs = {
@@ -103,6 +110,9 @@
 
       nixosConfigurations.rtx3070 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        extraArgs = {
+          inherit (self) inputs;
+        };
         modules = [
           ({
             nixpkgs = {
