@@ -27,6 +27,13 @@
     libinput.enable = true;
   };
 
+  # Auto-unlock kwallet
+  security.pam.services.kwallet =
+    {
+      name = "kwallet";
+      enableKwallet = true;
+    };
+
   # Audio
   hardware.pulseaudio.enable = true;
   sound.enable = true;
