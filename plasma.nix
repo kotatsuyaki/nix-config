@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     kwallet-pam
     plasma-browser-integration
@@ -8,7 +8,7 @@
     gnome.adwaita-icon-theme
     ark
 
-    plasma5Packages.bismuth
+    inputs.unstable.legacyPackages.x86_64-linux.plasma5Packages.bismuth
     gnome.gnome-keyring
 
     # clipboard access from terminal
