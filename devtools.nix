@@ -16,6 +16,7 @@
     tmux
     lazygit
     htop
+    btop
     ranger
     ueberzug
 
