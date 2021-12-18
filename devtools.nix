@@ -24,6 +24,7 @@
     zsh
     git
     ripgrep
+    fd
     tealdeer
     fzf
     bat
