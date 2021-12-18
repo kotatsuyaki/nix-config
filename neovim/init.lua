@@ -463,7 +463,11 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'clangd', 'texlab', 'rnix',
+        'pyright', 'texlab', 'rnix',
+        {
+            'clangd',
+            filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda'},
+        },
         {
             'dartls',
             cmd = {'dart', 'language-server', '--client-version', '1.2'},
