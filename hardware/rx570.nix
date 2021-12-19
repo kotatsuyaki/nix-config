@@ -37,4 +37,7 @@
   swapDevices = [ ];
 
   boot.tmpOnTmpfs = true;
+
+  # enable opencl
+  hardware.opengl.extraPackages = [ pkgs.mesa.opencl ];
 }
