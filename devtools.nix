@@ -16,6 +16,7 @@
     tmux
     lazygit
     htop
+    btop
     ranger
     ueberzug
 
@@ -23,6 +24,7 @@
     zsh
     git
     ripgrep
+    fd
     tealdeer
     fzf
     bat
