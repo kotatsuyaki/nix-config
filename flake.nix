@@ -49,6 +49,7 @@
 
           # dev
           ./devtools.nix
+          ./zsh
           ./neovim
           ./xilinx.nix
           ./direnv.nix
