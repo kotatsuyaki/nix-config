@@ -62,7 +62,6 @@
           # ./ter-132n.nix
           ./tlp.nix
           ./virt.nix
-          ./waydroid.nix
         ];
       };
 
