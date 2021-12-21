@@ -8,7 +8,7 @@
     gnome.adwaita-icon-theme
     ark
 
-    inputs.unstable.legacyPackages.x86_64-linux.plasma5Packages.bismuth
+    plasma5Packages.bismuth
     gnome.gnome-keyring
 
     # clipboard access from terminal
