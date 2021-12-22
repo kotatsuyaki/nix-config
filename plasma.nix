@@ -17,6 +17,7 @@
     # logitech
     solaar
   ];
+  system.extraDependencies = with pkgs; [ xdotool ];
 
   # DE and touchpad
   services.xserver = {
