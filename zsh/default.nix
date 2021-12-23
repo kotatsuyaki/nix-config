@@ -7,7 +7,7 @@
     ohMyZsh = {
       enable = true;
       theme = "eastwood";
-      plugins = [ "fzf" "cp" ];
+      plugins = [ "fzf" "cp" "direnv" ];
     };
     promptInit = builtins.readFile ./init.zsh;
   };
