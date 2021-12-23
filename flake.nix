@@ -138,6 +138,7 @@
 
           # dev
           ./devtools.nix
+          ./zsh
           ./neovim
           ./direnv.nix
           ./xilinx.nix
