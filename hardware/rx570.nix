@@ -38,6 +38,8 @@
 
   boot.tmpOnTmpfs = true;
 
+  networking.hostName = "rx570";
+
   # enable opencl
   hardware.opengl.extraPackages = [ pkgs.mesa.opencl ];
 }
