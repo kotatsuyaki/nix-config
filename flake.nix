@@ -96,6 +96,7 @@
           # dev
           ./devtools.nix
           ./neovim
+          ./zsh
           ./direnv.nix
           ./xilinx.nix
 
