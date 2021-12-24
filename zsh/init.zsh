@@ -1,3 +1,6 @@
+# Add grey hostname block (%M)
+export PROMPT='$(git_custom_status)%F{244}[%M]%{$fg[cyan]%}[%~% ]%{$reset_color%}%B$%b '
+
 function ranger {
     local IFS=$'\t\n'
     local tempfile="$(mktemp -t tmp.XXXXXX)"
