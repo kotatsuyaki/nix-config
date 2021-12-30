@@ -1,35 +1,16 @@
 {
   "nodes": {
-    "nb": {
-      "inputs": {
-        "nixpkgs": "nixpkgs",
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1640758165,
-        "narHash": "sha256-C/Xy8ydrq0wBCkQpX9xhMLet7mv9knY7EfwoM1Qf3Hk=",
-        "ref": "master",
-        "rev": "dd7c0ae7bccc03383a30393925a11646e6dfd0f2",
-        "revCount": 2,
-        "type": "git",
-        "url": "https://code.akitaki.tk/nb-nix.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://code.akitaki.tk/nb-nix.git"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1640572776,
-        "narHash": "sha256-pWMTubBy1Ep31iuQ5lEKW2mjSHWEvcbvy9uHVch2764=",
-        "owner": "nixos",
+        "lastModified": 1640798027,
+        "narHash": "sha256-1e7bsxWJW0ugkA95AMGL3Da9sHugkz+J4kfYB9fTWZc=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d887ac7aee92e8fc54dde9060d60d927afae9d69",
+        "rev": "8588b14a397e045692d0a87192810b6dddf53003",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "NixOS",
         "ref": "nixos-21.11",
         "repo": "nixpkgs",
         "type": "github"
@@ -37,24 +18,43 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1640572776,
-        "narHash": "sha256-pWMTubBy1Ep31iuQ5lEKW2mjSHWEvcbvy9uHVch2764=",
-        "owner": "NixOS",
+        "lastModified": 1640350772,
+        "narHash": "sha256-8Ug1fj5CLjyECT1Jw1VjeJ7+dmgO5grsXoXre3PywO4=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d887ac7aee92e8fc54dde9060d60d927afae9d69",
+        "rev": "00f84d37a2507dee0219cf894f11a7cbf0c49ccb",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-21.11",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
+    "personal": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1640865101,
+        "narHash": "sha256-4sY3EMGXsc8fc6TTM55hxpBBkC2g5NaKvw4htnPsW6A=",
+        "ref": "master",
+        "rev": "eaf9d1d235b728d73af756bf944c03cd4c13116d",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://code.akitaki.tk/nix-packages.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://code.akitaki.tk/nix-packages.git"
+      }
+    },
     "root": {
       "inputs": {
-        "nb": "nb",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
+        "personal": "personal",
         "unstable": "unstable",
         "utils": "utils_2"
       }

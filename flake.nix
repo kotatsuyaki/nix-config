@@ -3,9 +3,9 @@
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
   inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
   inputs.utils.url = github:numtide/flake-utils;
-  inputs.nb.url = git+https://code.akitaki.tk/nb-nix.git;
+  inputs.personal.url = git+https://code.akitaki.tk/nix-packages.git;
 
-  outputs = { self, nixpkgs, unstable, utils, nb }:
+  outputs = { self, nixpkgs, unstable, utils, personal }:
     let
       devShells = utils.lib.eachDefaultSystem
         (system:
@@ -22,19 +22,17 @@
         );
     in
     devShells // {
-      nixosConfigurations.x13 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.x13 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         extraArgs = {
           inherit (self) inputs;
+          inherit system;
         };
         modules = [
           ({
             nixpkgs = {
               config.allowUnfree = true;
             };
-          })
-          ({ inputs, ... }: {
-            environment.systemPackages = [ inputs.nb.outputs.packages.x86_64-linux.nb ];
           })
           ./hardware/x13.nix
           ./boot.nix
@@ -70,16 +68,21 @@
         ];
       };
 
-      nixosConfigurations.rx570 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.rx570 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         extraArgs = {
           inherit (self) inputs;
+          inherit system;
         };
         modules = [
           ({
             nixpkgs = {
               config.allowUnfree = true;
             };
+          })
+          ({ inputs, ... }: {
+            /* environment.systemPackages = [ personal ]; */
+            /* environment.systemPackages = [ inputs.nb.outputs.packages.x86_64-linux.nb ]; */
           })
           ./waydroid.nix
           ./hardware/rx570.nix
@@ -114,10 +117,11 @@
         ];
       };
 
-      nixosConfigurations.rtx3070 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.rtx3070 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         extraArgs = {
           inherit (self) inputs;
+          inherit system;
         };
         modules = [
           ({
@@ -157,10 +161,11 @@
         ];
       };
 
-      nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         extraArgs = {
           inherit (self) inputs;
+          inherit system;
         };
         modules = [
           ./ec2.nix

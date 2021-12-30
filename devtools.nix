@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, system, ... }: {
   environment.systemPackages = with pkgs; [
     # downloaders
     aria2
@@ -29,6 +29,9 @@
     fzf
     bat
     dnsutils
+
+    # note taking
+    inputs.personal.packages.${system}.nb
   ];
 
   # Set git commit --verbose as default
