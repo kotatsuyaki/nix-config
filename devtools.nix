@@ -25,6 +25,7 @@
     git
     ripgrep
     fd
+    exa
     tealdeer
     fzf
     bat
