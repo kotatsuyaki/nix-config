@@ -38,11 +38,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1640865101,
-        "narHash": "sha256-4sY3EMGXsc8fc6TTM55hxpBBkC2g5NaKvw4htnPsW6A=",
+        "lastModified": 1640885125,
+        "narHash": "sha256-DZZQOffr9Oehvqsl5nLD7xipBg0KcNtmBG/LBZVS0ak=",
         "ref": "master",
-        "rev": "eaf9d1d235b728d73af756bf944c03cd4c13116d",
-        "revCount": 1,
+        "rev": "3d01c86df6c80f2f38368660c012b50dee486906",
+        "revCount": 4,
         "type": "git",
         "url": "https://code.akitaki.tk/nix-packages.git"
       },
