@@ -178,6 +178,7 @@
           ./neovim
           ./misc.nix
           ./cgit
+          ./zsh
           (self.inputs.nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
           ({ ... }: { networking.firewall.enable = false; })
         ];
