@@ -22,3 +22,10 @@ function ranger {
 # ^u = Ctrl+U
 # ^M = Return
 bindkey -s '^n' '^uranger^M'
+
+if (( $+commands[exa] )); then
+    alias ls="exa"
+    alias ll="exa -l"
+    alias lt="exa -lT"
+    alias lg="exa -lG"
+fi
