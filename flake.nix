@@ -167,6 +167,11 @@
           inherit (self) inputs;
           inherit system;
         };
+        specialArgs = {
+          sourcehut-module = "${self.inputs.unstable}/nixos/modules/services/misc/sourcehut/default.nix";
+          redis-module = "${self.inputs.unstable}/nixos/modules/services/databases/redis.nix";
+        };
+
         modules = [
           ./ec2.nix
           ./enable-flakes.nix

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, sourcehut-module, redis-module, ... }:
 let
   port = 16160;
   # use customized highlighter script,
@@ -14,6 +14,15 @@ let
     (builtins.readFile ./head-include.html);
 in
 {
+  imports = [
+    sourcehut-module
+    redis-module
+  ];
+  disabledModules = [
+    "services/misc/sourcehut"
+    "services/databases/redis.nix"
+  ];
+
   # cgit server
   services.lighttpd = {
     inherit port;
