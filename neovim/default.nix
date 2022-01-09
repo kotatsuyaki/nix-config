@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -20,6 +20,7 @@
           # Language syntax
           nvim-treesitter
           vim-glsl
+          vim-opencl
 
           # Editing support
           kommentary
