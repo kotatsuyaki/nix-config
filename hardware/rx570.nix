@@ -41,5 +41,9 @@
   networking.hostName = "rx570";
 
   # enable opencl
-  hardware.opengl.extraPackages = [ pkgs.mesa.opencl ];
+  hardware.opengl.extraPackages = [
+    pkgs.rocm-opencl-icd
+    pkgs.rocm-opencl-runtime
+    /* pkgs.mesa.opencl */
+  ];
 }
