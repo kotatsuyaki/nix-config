@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   # Enable flakes
   nix = {
     package = pkgs.nixFlakes;
@@ -6,4 +6,5 @@
       experimental-features = nix-command flakes
     '';
   };
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 }
