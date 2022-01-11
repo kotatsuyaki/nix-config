@@ -44,6 +44,5 @@
   hardware.opengl.extraPackages = [
     pkgs.rocm-opencl-icd
     pkgs.rocm-opencl-runtime
-    /* pkgs.mesa.opencl */
   ];
 }
