@@ -18,11 +18,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1641244400,
-        "narHash": "sha256-8i4oasWEz/2y9U+F1XU15jfwSbd5YOEBh2tyBBm/W8E=",
+        "lastModified": 1641870998,
+        "narHash": "sha256-6HkxR2WZsm37VoQS7jgp6Omd71iw6t1kP8bDbaqCDuI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c6019d8efb5530dcf7ce98086b8e091be5ff900a",
+        "rev": "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb",
         "type": "github"
       },
       "original": {
@@ -38,11 +38,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1641480902,
-        "narHash": "sha256-N29Z4DLu/lCrz7dYLCVA5pTQ2CV4fZH7b9xnyYb+ZFI=",
+        "lastModified": 1642162431,
+        "narHash": "sha256-1oV37OWaEmjgp32OW+f5R/XqFzkLmV/WStjJxXSC4ik=",
         "ref": "master",
-        "rev": "9ed248d966a0867994aa2263aa1b66fddcb88c23",
-        "revCount": 13,
+        "rev": "643536f42023a1d410f589f9176f37e2a8430067",
+        "revCount": 14,
         "type": "git",
         "url": "https://code.akitaki.tk/nix-packages.git"
       },
@@ -61,11 +61,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1641710811,
-        "narHash": "sha256-yVJ+CtwWZY8BnkNIJ/ue5a28yrRM6CkDF1LvmGmqqwM=",
+        "lastModified": 1642104392,
+        "narHash": "sha256-m71b7MgMh9FDv4MnI5sg9MiBVW6DhE1zq+d/KlLWSC8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0ecf7d414811f831060cf55707c374d54fbb1dec",
+        "rev": "5aaed40d22f0d9376330b6fa413223435ad6fee5",
         "type": "github"
       },
       "original": {
