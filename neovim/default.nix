@@ -21,6 +21,7 @@
           nvim-treesitter
           vim-glsl
           vim-opencl
+          vim-pandoc-syntax
 
           # Editing support
           kommentary
