@@ -92,6 +92,7 @@
           ./users.nix
           ./enable-flakes.nix
           ./ssh.nix
+          ./haskell.nix
 
           # DE
           ./plasma.nix
