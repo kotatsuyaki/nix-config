@@ -100,6 +100,7 @@
           ./fonts.nix
           ./sync.nix
           ./localize.nix
+          ./ios.nix
 
           # dev
           ./devtools.nix
