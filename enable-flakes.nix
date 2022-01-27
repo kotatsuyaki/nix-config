@@ -7,4 +7,5 @@
     '';
   };
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.registry.unstable.flake = inputs.unstable;
 }
