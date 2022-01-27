@@ -34,6 +34,7 @@
           # Git
           lazygit-nvim
           gitsigns-nvim
+          git-blame-nvim
 
           #######
           # LSP #

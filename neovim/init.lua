@@ -275,6 +275,9 @@ function config_gitsign()
 end
 config_gitsign()
 
+-- git blame off by default
+vim.g['gitblame_enabled'] = 0
+
 -- auto close brackets
 function config_autopairs()
     require('nvim-autopairs').setup {}
