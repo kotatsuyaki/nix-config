@@ -30,6 +30,7 @@
     fzf
     bat
     dnsutils
+    archiver
 
     # note taking
     inputs.personal.packages.${system}.nb
