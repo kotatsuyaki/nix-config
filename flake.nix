@@ -44,10 +44,12 @@
 
           # DE
           ./plasma.nix
+          ./waydroid.nix
           ./desktop-apps.nix
           ./fonts.nix
           ./sync.nix
           ./localize.nix
+          ./ios.nix
 
           # dev
           ./devtools.nix
