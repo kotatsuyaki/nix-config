@@ -3,6 +3,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  services.fwupd.enable = true;
+
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/244cb5e0-9c0c-41fe-9326-1c09b9191351";
