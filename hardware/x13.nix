@@ -1,6 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }: {
   boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "i8042.probe_defer" ];
   boot.extraModulePackages = [ ];
 
   services.fwupd.enable = true;
