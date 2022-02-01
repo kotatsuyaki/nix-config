@@ -8,7 +8,20 @@
     gnome.adwaita-icon-theme
     ark
 
-    plasma5Packages.bismuth
+    (plasma5Packages.bismuth.overrideAttrs (old: rec {
+      version = "2.3.0";
+      src = pkgs.fetchFromGitHub {
+        owner = "Bismuth-Forge";
+        repo = "bismuth";
+        rev = "v${version}";
+        sha256 = "sha256-b+dlBv1M4//oeCGM2qrQ3s6z2yLql6eQWNqId3JB3Z4=";
+      };
+      patches = [ ];
+      cmakeFlags = [
+        "-DUSE_TSC=OFF"
+        "-DUSE_NPM=OFF"
+      ];
+    }))
     gnome.gnome-keyring
 
     # clipboard access from terminal
