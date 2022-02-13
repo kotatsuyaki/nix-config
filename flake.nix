@@ -103,6 +103,7 @@
           ./sync.nix
           ./localize.nix
           ./ios.nix
+          ./steam.nix
 
           # dev
           ./devtools.nix
