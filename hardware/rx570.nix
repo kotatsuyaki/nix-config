@@ -45,4 +45,8 @@
     pkgs.rocm-opencl-icd
     pkgs.rocm-opencl-runtime
   ];
+
+  # enable opengl
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
 }
