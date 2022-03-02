@@ -15,7 +15,9 @@
 
     sublime4
     sublime-merge
-    minecraft
+    (minecraft.override {
+      jre = pkgs.openjdk8;
+    })
   ];
 
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
