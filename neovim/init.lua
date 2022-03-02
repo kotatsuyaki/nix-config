@@ -506,6 +506,12 @@ function config_lsp()
                 },
             },
         },
+        -- Java
+        {
+            'java_language_server',
+            cmd = { 'java-language-server' },
+            root_dir = require('lspconfig/util').path.dirname,
+        },
     }
 
     -- setup servers
