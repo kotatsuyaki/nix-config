@@ -18,6 +18,8 @@
     (minecraft.override {
       jre = pkgs.openjdk8;
     })
+
+    libreoffice-qt
   ];
 
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
