@@ -19,6 +19,8 @@
       jre = pkgs.openjdk8;
     })
 
+    rclone
+
     libreoffice-qt
   ];
 
