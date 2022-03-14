@@ -57,6 +57,7 @@
           ./neovim
           ./xilinx.nix
           ./direnv.nix
+          ./postgres.nix
 
           # media
           ./media.nix
