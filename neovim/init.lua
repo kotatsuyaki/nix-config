@@ -478,6 +478,15 @@ function config_lsp()
         {
             'hls',
             cmd = { 'haskell-language-server', '--lsp' },
+            settings = {
+                haskell = {
+                    plugin = {
+                        haddockComments = {
+                            globalOn = true,
+                        },
+                    },
+                },
+            },
         },
         {
             -- the lspconfig's names doesn't contain dashes
