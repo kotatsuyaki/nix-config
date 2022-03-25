@@ -6,162 +6,93 @@
 
   outputs = { self, nixpkgs, unstable, utils }:
     let
-      devShells = utils.lib.eachDefaultSystem
-        (system:
-          let pkgs = nixpkgs.legacyPackages.${system};
-          in
-          {
-            devShell = pkgs.mkShell {
-              buildInputs = with pkgs; [
-                rnix-lsp
-                nixpkgs-fmt
-              ];
-            };
-          }
-        );
+      devShells = utils.lib.eachDefaultSystem (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          devShell = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              rnix-lsp
+              nixpkgs-fmt
+            ];
+          };
+        }
+      );
+      osConfig =
+        { hasGui ? false
+        , extraModules ? [ ]
+        , hasNvidia ? false
+        , ...
+        }: nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          extraArgs = {
+            inherit (self) inputs;
+            inherit system;
+          };
+          modules = [
+            # Always enable unfree to ease management
+            ({ nixpkgs.config.allowUnfree = true; })
+            ./boot.nix
+            ./network.nix
+            ./gc.nix
+            ./users.nix
+            ./nix-settings.nix
+            ./sshd.nix
+            ./localize.nix
+
+            # dev
+            ./devtools.nix
+            ./zsh
+            ./neovim
+            ./direnv.nix
+            ./containers.nix
+
+            # media
+            ./misc.nix
+          ] ++ extraModules ++ (if hasGui then [
+            # DE-specific stuff
+            ./plasma.nix
+            ./desktop-apps.nix
+            ./fonts.nix
+            ./sync.nix
+            ./ime.nix
+            ./media.nix
+            ./mpd.nix
+            ./virt.nix
+          ] else [ ]) ++ (if hasNvidia then [
+            ./nvidia.nix
+          ] else [ ]);
+        };
     in
     devShells // {
-      nixosConfigurations.x13 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        extraArgs = {
-          inherit (self) inputs;
-          inherit system;
-        };
-        modules = [
-          ({
-            nixpkgs = {
-              config.allowUnfree = true;
-            };
-          })
+      nixosConfigurations.x13 = osConfig {
+        hasGui = true;
+        extraModules = [
           ./hardware/x13.nix
-          ./boot.nix
-          ./network.nix
           ./fprintd.nix
-          ./gc.nix
-          ./users.nix
-          ./enable-flakes.nix
-
-          # DE
-          ./plasma.nix
-          ./waydroid.nix
-          ./desktop-apps.nix
-          ./fonts.nix
-          ./sync.nix
-          ./localize.nix
-          ./ios.nix
-
-          # dev
-          ./devtools.nix
-          ./zsh
-          ./neovim
-          ./xilinx.nix
-          ./direnv.nix
-          ./postgres.nix
-
-          # media
-          ./media.nix
-          ./misc.nix
-          ./mpd.nix
-
-          # laptop
-          # ./ter-132n.nix
           ./tlp.nix
-          ./virt.nix
         ];
       };
 
-      nixosConfigurations.rx570 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        extraArgs = {
-          inherit (self) inputs;
-          inherit system;
-        };
-        modules = [
-          ({
-            nixpkgs = {
-              config.allowUnfree = true;
-            };
-          })
-          ./waydroid.nix
+      nixosConfigurations.rx570 = osConfig {
+        hasGui = true;
+        extraModules = [
           ./hardware/rx570.nix
-          ./boot.nix
-          ./network.nix
-          ./gc.nix
-          ./users.nix
-          ./enable-flakes.nix
-          ./ssh.nix
-          ./haskell.nix
-
-          # DE
-          ./plasma.nix
-          ./desktop-apps.nix
-          ./fonts.nix
-          ./sync.nix
-          ./localize.nix
+          ./waydroid.nix
           ./ios.nix
           ./steam.nix
-
-          # dev
-          ./devtools.nix
-          ./neovim
-          ./zsh
-          ./direnv.nix
-          ./xilinx.nix
-
-          # media
-          ./media.nix
-          ./misc.nix
-          ./mpd.nix
-
-          # laptop
-          ./virt.nix
         ];
       };
 
-      nixosConfigurations.rtx3070 = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        extraArgs = {
-          inherit (self) inputs;
-          inherit system;
-        };
-        modules = [
-          ({
-            nixpkgs = {
-              config.allowUnfree = true;
-            };
-          })
+      nixosConfigurations.rtx3070 = osConfig {
+        hasGui = false;
+        hasNvidia = true;
+        extraModules = [
           ./hardware/rtx3070.nix
-          ./nvidia.nix
-          ./boot.nix
-          ./network.nix
-          ./gc.nix
-          ./users.nix
-          ./enable-flakes.nix
-          ./ssh.nix
-
-          # DE
-          ./plasma.nix
-          ./desktop-apps.nix
-          ./fonts.nix
-          ./sync.nix
-          ./localize.nix
-
-          # dev
-          ./devtools.nix
-          ./zsh
-          ./neovim
-          ./direnv.nix
-          ./xilinx.nix
-
-          # media
-          ./media.nix
-          ./misc.nix
-          ./mpd.nix
-
-          ./virt.nix
         ];
       };
 
+      # TODO: Remove this config after its retirement
       nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         extraArgs = {
@@ -170,7 +101,7 @@
         };
         modules = [
           ./ec2.nix
-          ./enable-flakes.nix
+          ./nix-settings.nix
           ./users.nix
           ./ssh.nix
 
@@ -181,7 +112,6 @@
           ./cgit
           ./zsh
           (self.inputs.nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
-          ({ ... }: { networking.firewall.enable = false; })
         ];
       };
     };

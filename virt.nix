@@ -1,8 +1,6 @@
 { pkgs, inputs, system, ... }: {
   environment.systemPackages = with pkgs; [
     virt-manager
-    podman
-    appimage-run
     inputs.unstable.legacyPackages.${system}.quickemu
     spice-gtk
   ];
@@ -15,9 +13,5 @@
       secureBoot = true;
       tpmSupport = true;
     });
-    podman = {
-      enable = true;
-      enableNvidia = true;
-    };
   };
 }

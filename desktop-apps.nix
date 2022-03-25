@@ -10,6 +10,7 @@
     gimp
     feh
     gtkwave
+    appimage-run
 
     firefox-bin
 

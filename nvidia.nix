@@ -10,4 +10,5 @@
     nvidia-podman
   ];
   virtualisation.podman.enableNvidia = true;
+  virtualisation.docker.enableNvidia = true;
 }
