@@ -3,9 +3,8 @@
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
   inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
   inputs.utils.url = github:numtide/flake-utils;
-  inputs.personal.url = git+https://code.akitaki.tk/nix-packages.git;
 
-  outputs = { self, nixpkgs, unstable, utils, personal }:
+  outputs = { self, nixpkgs, unstable, utils }:
     let
       devShells = utils.lib.eachDefaultSystem
         (system:
@@ -82,10 +81,6 @@
             nixpkgs = {
               config.allowUnfree = true;
             };
-          })
-          ({ inputs, ... }: {
-            /* environment.systemPackages = [ personal ]; */
-            /* environment.systemPackages = [ inputs.nb.outputs.packages.x86_64-linux.nb ]; */
           })
           ./waydroid.nix
           ./hardware/rx570.nix
