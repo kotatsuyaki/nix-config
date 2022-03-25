@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
   networking.hostName = "rtx3070";
 
@@ -15,21 +16,45 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/37455701-2f3a-4fbd-a098-2265f03a2d2b";
+    {
+      device = "/dev/disk/by-uuid/37455701-2f3a-4fbd-a098-2265f03a2d2b";
       fsType = "btrfs";
       options = [ "subvol=nixos" "compress=zstd" "discard" "noatime" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/37455701-2f3a-4fbd-a098-2265f03a2d2b";
+    {
+      device = "/dev/disk/by-uuid/37455701-2f3a-4fbd-a098-2265f03a2d2b";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "discard" "noatime" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/CBD7-39DA";
+    {
+      device = "/dev/disk/by-uuid/CBD7-39DA";
       fsType = "vfat";
     };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/f67cc617-051b-44c4-b664-322111cd2008"; } ];
+  swapDevices = [{ device = "/dev/disk/by-uuid/f67cc617-051b-44c4-b664-322111cd2008"; }];
+
+  services.autossh.sessions = [
+    {
+      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 1314:localhost:22 -i /home/akitaki/.ssh/id_rsa akitaki@13.231.41.144";
+      monitoringPort = 20000;
+      name = "ec2";
+      user = "akitaki";
+    }
+    {
+      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 1314:localhost:22 -i /home/akitaki/.ssh/id_rsa akitaki@140.114.209.20";
+      monitoringPort = 21000;
+      name = "dorm";
+      user = "akitaki";
+    }
+    {
+      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 25565:localhost:25565 -i /home/akitaki/.ssh/id_rsa akitaki@140.114.209.20";
+      monitoringPort = 28000;
+      name = "dorm-mc";
+      user = "akitaki";
+    }
+  ];
 }
