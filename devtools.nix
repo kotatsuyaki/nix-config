@@ -31,9 +31,6 @@
     bat
     dnsutils
     archiver
-
-    # note taking
-    inputs.personal.packages.${system}.nb
   ];
 
   # Set git commit --verbose as default
