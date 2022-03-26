@@ -49,6 +49,8 @@
 
             # media
             ./misc.nix
+
+            (import ./virt.nix { inherit hasGui; })
           ] ++ extraModules ++ (if hasGui then [
             # DE-specific stuff
             ./plasma.nix
@@ -58,7 +60,6 @@
             ./ime.nix
             ./media.nix
             ./mpd.nix
-            ./virt.nix
           ] else [ ]) ++ (if hasNvidia then [
             ./nvidia.nix
           ] else [ ]);
