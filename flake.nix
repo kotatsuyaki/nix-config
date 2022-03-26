@@ -90,6 +90,7 @@
         hasNvidia = true;
         extraModules = [
           ./hardware/rtx3070.nix
+          ./services/mcserver.nix
         ];
       };
 
