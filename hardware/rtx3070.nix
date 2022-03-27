@@ -36,25 +36,4 @@
     };
 
   swapDevices = [{ device = "/dev/disk/by-uuid/f67cc617-051b-44c4-b664-322111cd2008"; }];
-
-  services.autossh.sessions = [
-    {
-      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 1314:localhost:22 -i /home/akitaki/.ssh/id_rsa akitaki@13.231.41.144";
-      monitoringPort = 20000;
-      name = "ec2";
-      user = "akitaki";
-    }
-    {
-      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 1314:localhost:22 -i /home/akitaki/.ssh/id_rsa akitaki@140.114.209.20";
-      monitoringPort = 21000;
-      name = "dorm";
-      user = "akitaki";
-    }
-    {
-      extraArguments = "-o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -NR 25565:localhost:25565 -i /home/akitaki/.ssh/id_rsa akitaki@140.114.209.20";
-      monitoringPort = 28000;
-      name = "dorm-mc";
-      user = "akitaki";
-    }
-  ];
 }

@@ -91,6 +91,26 @@
         extraModules = [
           ./hardware/rtx3070.nix
           ./services/mcserver.nix
+          (import ./services/autossh.nix {
+            sessions = [
+              {
+                host = "vultr";
+                user = "akitaki";
+                pubkey = "/home/akitaki/.ssh/id_rsa";
+                remote-port = 1314;
+                local-port = 22;
+                monitor-port = 25000;
+              }
+              {
+                host = "dorm";
+                user = "akitaki";
+                pubkey = "/home/akitaki/.ssh/id_rsa";
+                remote-port = 1314;
+                local-port = 22;
+                monitor-port = 26000;
+              }
+            ];
+          })
         ];
       };
 
