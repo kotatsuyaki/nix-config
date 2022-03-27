@@ -8,6 +8,7 @@
     # extractors
     p7zip
     unzip
+    archiver
 
     # lang
     python3Packages.ipython
@@ -15,7 +16,6 @@
     # tui apps
     tmux
     lazygit
-    htop
     btop
     ranger
     ueberzug
@@ -23,14 +23,17 @@
     # cli tools
     zsh
     git
-    ripgrep
-    fd
-    exa
-    tealdeer
-    fzf
-    bat
     dnsutils
-    archiver
+    fzf
+
+    # rust stuff
+    ripgrep # grep
+    fd # find
+    exa # ls
+    tealdeer
+    bat
+    dog # dig
+    du-dust # du
   ];
 
   # Set git commit --verbose as default
