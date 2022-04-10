@@ -82,6 +82,19 @@
           ./waydroid.nix
           ./ios.nix
           ./steam.nix
+          ({
+            networking.nat.enable = true;
+            networking.nat.internalInterfaces = [ "ve-+" ];
+            networking.nat.externalInterface = "enp4s0";
+            networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
+
+            containers.host1 = {
+              config = import ./host1.nix;
+              privateNetwork = true;
+              hostAddress = "192.168.200.10";
+              localAddress = "192.168.200.11";
+            };
+          })
         ];
       };
 
