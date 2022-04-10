@@ -14,6 +14,7 @@
     enable = true;
     upstreamDefaults = true;
     settings = {
+      listen_addresses = [ "[::]:53" ];
       bootstrap_resolvers = [
         "8.8.8.8:53" # google
         "172.16.0.2:53" # library
