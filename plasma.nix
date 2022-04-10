@@ -38,6 +38,7 @@
 
   # Audio
   hardware.pulseaudio.enable = true;
+  services.pipewire.enable = true;
   sound.enable = true;
 
   # Printers
