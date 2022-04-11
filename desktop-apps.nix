@@ -16,6 +16,7 @@
 
     sublime4
     sublime-merge
+    musescore
     (minecraft.override {
       jre = pkgs.openjdk8;
     })
