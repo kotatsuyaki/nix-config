@@ -72,6 +72,7 @@
           ./hardware/x13.nix
           ./fprintd.nix
           ./tlp.nix
+          ./lxd.nix
         ];
       };
 
