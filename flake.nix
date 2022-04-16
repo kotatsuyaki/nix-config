@@ -1,12 +1,14 @@
 {
   description = "Flakes NixOS config for personal machines";
+
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
   inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
   inputs.utils.url = github:numtide/flake-utils;
 
   outputs = { self, nixpkgs, unstable, utils }:
     let
-      devShells = utils.lib.eachDefaultSystem (system:
+      # Devshell for nix development
+      dev-shells = utils.lib.eachDefaultSystem (system:
         let pkgs = nixpkgs.legacyPackages.${system};
         in
         {
@@ -18,80 +20,66 @@
           };
         }
       );
-      osConfig =
+
+      # Custom packages defined in this repo to be exposed
+      custom-pkgs = import ./packages { inherit nixpkgs utils; };
+
+      lib = nixpkgs.lib;
+      # Non-recursively list files and dirs under `dir`
+      list-files = dir: lib.mapAttrsToList
+        (name: type: dir + "/${name}")
+        (builtins.readDir dir);
+
+      # Aggregated list of modules
+      default-modules = list-files ./default-modules;
+      gui-modules = list-files ./gui-modules;
+
+      # Wrapper for nixosSystem
+      os-config =
         { hasGui ? false
         , extraModules ? [ ]
-        , hasNvidia ? false
         , ...
-        }: nixpkgs.lib.nixosSystem rec {
+        }: lib.nixosSystem rec {
           system = "x86_64-linux";
           extraArgs = {
+            inherit self;
             inherit (self) inputs;
             inherit system;
+            inherit hasGui;
           };
-          modules = [
-            # Always enable unfree to ease management
-            ({ nixpkgs.config.allowUnfree = true; })
-            ./boot.nix
-            ./network.nix
-            ./gc.nix
-            ./users.nix
-            ./nix-settings.nix
-            ./sshd.nix
-            ./localize.nix
-
-            # dev
-            ./devtools.nix
-            ./zsh
-            ./neovim
-            ./direnv.nix
-            ./containers.nix
-
-            # media
-            ./misc.nix
-
-            (import ./virt.nix { inherit hasGui; })
-          ] ++ extraModules ++ (if hasGui then [
-            # DE-specific stuff
-            ./plasma.nix
-            ./desktop-apps.nix
-            ./fonts.nix
-            ./sync.nix
-            ./ime.nix
-            ./media.nix
-            ./mpd.nix
-          ] else [ ]) ++ (if hasNvidia then [
-            ./nvidia.nix
-          ] else [ ]);
+          modules =
+            default-modules ++
+            extraModules ++
+            (lib.optionals hasGui gui-modules);
         };
     in
-    devShells // {
-      nixosConfigurations.x13 = osConfig {
+    dev-shells // custom-pkgs // {
+      nixosConfigurations.x13 = os-config {
         hasGui = true;
         extraModules = [
           ./hardware/x13.nix
-          ./fprintd.nix
-          ./tlp.nix
-          ./lxd.nix
+          ./opt-modules/hardware/x13.nix
+          ./opt-modules/fprintd.nix
+          ./opt-modules/tlp.nix
+          ./opt-modules/lxd.nix
         ];
       };
 
-      nixosConfigurations.rx570 = osConfig {
+      nixosConfigurations.rx570 = os-config {
         hasGui = true;
         extraModules = [
           ./hardware/rx570.nix
-          ./waydroid.nix
-          ./ios.nix
-          ./steam.nix
-          (import ./cloud-compute-containers.nix { interface = "enp4s0"; })
+          ./opt-modules/waydroid.nix
+          ./opt-modules/ios.nix
+          ./opt-modules/steam.nix
         ];
       };
 
-      nixosConfigurations.rtx3070 = osConfig {
+      nixosConfigurations.rtx3070 = os-config {
         hasGui = false;
-        hasNvidia = true;
         extraModules = [
           ./hardware/rtx3070.nix
+          ./opt-modules/nvidia.nix
           ./services/mcserver.nix
           (import ./services/autossh.nix {
             sessions = [
@@ -113,29 +101,6 @@
               }
             ];
           })
-        ];
-      };
-
-      # TODO: Remove this config after its retirement
-      nixosConfigurations.t2micro = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        extraArgs = {
-          inherit (self) inputs;
-          inherit system;
-        };
-        modules = [
-          ./ec2.nix
-          ./nix-settings.nix
-          ./users.nix
-          ./ssh.nix
-
-          # dev
-          ./devtools.nix
-          ./neovim
-          ./misc.nix
-          ./cgit
-          ./zsh
-          (self.inputs.nixpkgs + "/nixos/modules/virtualisation/amazon-image.nix")
         ];
       };
     };

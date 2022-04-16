@@ -5,7 +5,7 @@ stdenv.mkDerivation rec {
   version = "20210323";
 
   src = fetchFromGitHub {
-    owner = "spwhitt";
+    owner = "endaaman";
     repo = "lxd-completion-zsh";
     rev = "e82701cb2b8c42f63479bb1a34e4f78a7cb5b75c";
     sha256 = "sha256-n7XUxVw/vPli3ZA30JfhECbkfx0YQsdW4/z6D6XkwgY=";

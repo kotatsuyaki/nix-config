@@ -1,7 +1,7 @@
-{ pkgs, inputs, ... }:
+{ pkgs, lib, self, system, ... }:
 {
   environment.systemPackages = with pkgs; [
-    inputs.unstable.legacyPackages.x86_64-linux.wezterm
+    self.packages.${system}.wezterm
     chromium
     tdesktop
     teams
@@ -27,5 +27,5 @@
   ];
 
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
-  environment.sessionVariables.WEZTERM_CONFIG_FILE = "${./configs/wezterm/wezterm.lua}";
+  environment.sessionVariables.WEZTERM_CONFIG_FILE = "${../configs/wezterm/wezterm.lua}";
 }
