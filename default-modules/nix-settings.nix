@@ -12,7 +12,7 @@
 
     # Personal binary cache
     trustedBinaryCaches = [
-      "kotatsuyaki.cachix.org"
+      "https://kotatsuyaki.cachix.org"
     ];
     binaryCaches = trustedBinaryCaches;
     binaryCachePublicKeys = [
