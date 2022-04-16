@@ -72,6 +72,7 @@
           ./opt-modules/waydroid.nix
           ./opt-modules/ios.nix
           ./opt-modules/steam.nix
+          ./opt-modules/lxd.nix
         ];
       };
 
