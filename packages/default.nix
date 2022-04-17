@@ -7,4 +7,7 @@ utils.lib.eachDefaultSystem (system:
     packages.wezterm = callPackage ./wezterm.nix {
       inherit (darwin.apple_sdk.frameworks) Cocoa CoreGraphics Foundation;
     };
+    packages.bismuth = import ./bismuth.nix {
+      inherit pkgs; inherit (pkgs) lib;
+    };
   })
