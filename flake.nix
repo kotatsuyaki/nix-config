@@ -58,7 +58,6 @@
         hasGui = true;
         extraModules = [
           ./hardware/x13.nix
-          ./opt-modules/hardware/x13.nix
           ./opt-modules/fprintd.nix
           ./opt-modules/tlp.nix
           ./opt-modules/lxd.nix
