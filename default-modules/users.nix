@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-  users.users.akitaki = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "input" ];
+  users.users.nixos = {
     shell = pkgs.zsh;
   };
 }

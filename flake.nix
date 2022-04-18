@@ -4,8 +4,10 @@
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
   inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
   inputs.utils.url = github:numtide/flake-utils;
+  inputs.nixos-wsl.url = github:nix-community/NixOS-WSL;
+  inputs.nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { self, nixpkgs, unstable, utils }:
+  outputs = { self, nixpkgs, unstable, utils, nixos-wsl }:
     let
       # Devshell for nix development
       dev-shells = utils.lib.eachDefaultSystem (system:
@@ -54,53 +56,12 @@
         };
     in
     dev-shells // custom-pkgs // {
-      nixosConfigurations.x13 = os-config {
-        hasGui = true;
-        extraModules = [
-          ./hardware/x13.nix
-          ./opt-modules/fprintd.nix
-          ./opt-modules/tlp.nix
-          ./opt-modules/lxd.nix
-        ];
-      };
-
-      nixosConfigurations.rx570 = os-config {
-        hasGui = true;
-        extraModules = [
-          ./hardware/rx570.nix
-          ./opt-modules/waydroid.nix
-          ./opt-modules/ios.nix
-          ./opt-modules/steam.nix
-          ./opt-modules/lxd.nix
-        ];
-      };
-
-      nixosConfigurations.rtx3070 = os-config {
+      nixosConfigurations.deltap = os-config {
         hasGui = false;
         extraModules = [
-          ./hardware/rtx3070.nix
-          ./opt-modules/nvidia.nix
-          ./services/mcserver.nix
-          (import ./services/autossh.nix {
-            sessions = [
-              {
-                host = "vultr";
-                user = "akitaki";
-                pubkey = "/home/akitaki/.ssh/id_rsa";
-                remote-port = 1314;
-                local-port = 22;
-                monitor-port = 25000;
-              }
-              {
-                host = "dorm";
-                user = "akitaki";
-                pubkey = "/home/akitaki/.ssh/id_rsa";
-                remote-port = 1314;
-                local-port = 22;
-                monitor-port = 26000;
-              }
-            ];
-          })
+          "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+          nixos-wsl.nixosModules.wsl
+          ./opt-modules/wsl.nix
         ];
       };
     };
