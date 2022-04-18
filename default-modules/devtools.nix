@@ -33,7 +33,7 @@
     exa # ls
     tealdeer
     bat
-    dog # dig
+    dogdns # dig
     du-dust # du
   ];
 
