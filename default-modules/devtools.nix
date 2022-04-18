@@ -25,6 +25,7 @@
     git
     dnsutils
     fzf
+    github-cli
 
     # rust stuff
     ripgrep # grep
