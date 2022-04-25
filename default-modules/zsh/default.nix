@@ -7,8 +7,17 @@
     ohMyZsh = {
       enable = true;
       theme = "eastwood";
-      plugins = [ "fzf" "cp" "direnv" "lxd-completion-zsh" ];
-      customPkgs = [ (pkgs.callPackage ./lxd-completion-zsh.nix { }) ];
+      plugins = [
+        "fzf"
+        "cp"
+        "direnv"
+        "lxd-completion-zsh"
+        "gh-completion-zsh"
+      ];
+      customPkgs = [
+        (pkgs.callPackage ./lxd-completion-zsh.nix { })
+        (pkgs.callPackage ./gh-completion-zsh.nix { })
+      ];
     };
     promptInit = builtins.readFile ./init.zsh;
   };
