@@ -1,8 +1,8 @@
 {
   description = "Flakes NixOS config for personal machines";
 
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
-  inputs.unstable.url = github:NixOS/nixpkgs/nixos-unstable;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+  inputs.unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   inputs.utils.url = github:numtide/flake-utils;
 
   outputs = { self, nixpkgs, unstable, utils }:
