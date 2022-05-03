@@ -41,7 +41,7 @@
         , ...
         }: lib.nixosSystem rec {
           system = "x86_64-linux";
-          extraArgs = {
+          specialArgs = {
             inherit self;
             inherit (self) inputs;
             inherit system;
