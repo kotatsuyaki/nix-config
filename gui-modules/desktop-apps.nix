@@ -12,7 +12,7 @@
     gtkwave
     appimage-run
 
-    firefox-bin
+    firefox
 
     sublime4
     sublime-merge
