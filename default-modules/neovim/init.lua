@@ -364,7 +364,7 @@ function config_diag()
     }
     )
     -- show diag float on hover
-    vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+    vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float()]]
     require('trouble').setup {
         icons = false,
     }
