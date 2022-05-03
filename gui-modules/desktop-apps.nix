@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     self.packages.${system}.wezterm
     chromium
-    tdesktop
+    kotatogram-desktop
     teams
     zathura
     mpv
