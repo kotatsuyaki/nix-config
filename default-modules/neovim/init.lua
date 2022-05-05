@@ -65,6 +65,11 @@ function config_colors()
 
     -- make vertical lines less distracting
     vim.cmd('au VimEnter * highlight IndentBlanklineChar guifg=#cccccc gui=nocombine')
+
+    -- Make bufferline filename color readable
+    local palette = require('nightfox.palette.dayfox').palette
+    vim.cmd('au VimEnter * highlight BufferLineError guibg=' .. palette.bg0)
+    vim.cmd('au VimEnter * highlight BufferLineErrorDiagnostic guibg=' .. palette.bg0)
 end
 
 config_colors()
