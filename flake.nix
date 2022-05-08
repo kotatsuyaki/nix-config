@@ -72,6 +72,7 @@
           ./opt-modules/ios.nix
           ./opt-modules/steam.nix
           ./opt-modules/lxd.nix
+          ./opt-modules/amdgpu-runpm-0.nix
         ];
       };
 
