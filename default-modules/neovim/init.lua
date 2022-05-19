@@ -142,69 +142,7 @@ function config_tabbar()
         guibg = { attribute = "bg", highlight = "normal" }
     }
 
-    require('bufferline').setup {
-        options = {
-            indicator_icon = ' ',
-            buffer_close_icon = '',
-            modified_icon = '●',
-            close_icon = '',
-            close_command = "bdelete %d",
-            right_mouse_command = "bdelete! %d",
-            left_trunc_marker = '',
-            right_trunc_marker = '',
-            show_tab_indicators = true,
-            show_close_icon = false,
-            -- show diags
-            diagnostics = "nvim_lsp",
-        },
-        highlights = {
-            fill = {
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "StatusLineNC" },
-            },
-            background = {
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "StatusLine" }
-            },
-            buffer_visible = {
-                gui = "",
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "Normal" }
-            },
-            buffer_selected = {
-                gui = "",
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "Normal" }
-            },
-            separator = {
-                guifg = { attribute = "bg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "StatusLine" },
-            },
-            separator_selected = {
-                guifg = { attribute = "fg", highlight = "Special" },
-                guibg = { attribute = "bg", highlight = "Normal" }
-            },
-            separator_visible = {
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "StatusLineNC" },
-            },
-            close_button = {
-                guifg = { attribute = "fg", highlight = "Normal" },
-                guibg = { attribute = "bg", highlight = "StatusLine" }
-            },
-            close_button_selected = normal_visible,
-            close_button_visible = normal_visible,
-            modified_visible = normal_visible,
-            -- diagnostics
-            diagnostic_visible = normal_visible,
-            info_visible = normal_visible,
-            info_diagnostic_visible = normal_visible,
-            warning_visible = warn_visible,
-            warning_diagnostic_visible = warn_visible,
-            error_visible = error_visible,
-            error_diagnostic_visible = error_visible,
-        }
-    }
+    require('bufferline').setup {}
 end
 
 config_tabbar()
