@@ -1,0 +1,3 @@
+{ ... }: {
+  services.ipfs.enable = true;
+}
