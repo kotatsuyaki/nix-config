@@ -35,6 +35,7 @@
     bat
     dogdns # dig
     du-dust # du
+    delta # diff
   ];
 
   # Set git commit --verbose as default
