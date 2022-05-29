@@ -25,6 +25,7 @@
     enable = true;
     xkbOptions = "altwin:swap_alt_win";
     displayManager.sddm.enable = true;
+    displayManager.defaultSession = "plasmawayland";
     desktopManager.plasma5.enable = true;
     libinput.enable = true;
   };
