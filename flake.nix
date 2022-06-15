@@ -74,6 +74,8 @@
           ./opt-modules/lxd.nix
           ./opt-modules/amdgpu-runpm-0.nix
           ./opt-modules/ipfs.nix
+          ./opt-modules/avahi.nix
+          ./opt-modules/k3s.nix
         ];
       };
 
