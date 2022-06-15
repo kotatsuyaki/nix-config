@@ -424,7 +424,7 @@ function config_lsp()
 
     -- lsp server options
     local servers = {
-        'pyright', 'clangd', 'texlab', 'rnix', 'tsserver', 'svls',
+        'pyright', 'clangd', 'texlab', 'rnix', 'tsserver', 'svls', 'denols',
         {
             'clangd',
             filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
