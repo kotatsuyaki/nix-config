@@ -30,6 +30,7 @@
           indent-blankline-nvim-lua
           which-key-nvim
           nvim-autopairs
+          markdown-preview-nvim
 
           # Git
           lazygit-nvim
