@@ -25,6 +25,9 @@
     git
     dnsutils
     fzf
+
+    # vendor tools
+    awscli2
     github-cli
 
     # rust stuff
