@@ -25,6 +25,7 @@
     git
     dnsutils
     fzf
+    fx
 
     # vendor tools
     awscli2
