@@ -1,7 +1,7 @@
 { pkgs, lib, self, system, ... }:
 {
   environment.systemPackages = with pkgs; [
-    self.packages.${system}.wezterm
+    wezterm
     chromium
     kotatogram-desktop
     teams
