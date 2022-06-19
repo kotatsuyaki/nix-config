@@ -1,4 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  nlsp-settings-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nlsp-settings-nvim";
+    version = "2022-06-09";
+    src = pkgs.fetchFromGitHub {
+      owner = "tamago324";
+      repo = "nlsp-settings.nvim";
+      rev = "527cdfef1b1eb47eb3e6e6f737575a710f307d3a";
+      sha256 = "sha256-2xhU9ZmboDAYrHNei+ZbQinDG7wyU8h4V8sL3AE2rmo=";
+    };
+  };
+in
+{
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -41,6 +54,7 @@
           # LSP #
           #######
           nvim-lspconfig
+          nlsp-settings-nvim
           # cmp
           nvim-cmp
           cmp-nvim-lsp

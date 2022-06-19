@@ -359,6 +359,17 @@ function config_lsp()
     -- LSP
     local nvim_lsp = require('lspconfig')
 
+    -- Setup per-project settings
+    local nlspsettings = require('nlspsettings')
+    nlspsettings.setup {}
+
+    -- Setup capabilities
+    local global_capabilities = vim.lsp.protocol.make_client_capabilities()
+    global_capabilities.textDocument.completion.completionItem.snippetSupport = true
+    nvim_lsp.util.default_config = vim.tbl_extend("force", nvim_lsp.util.default_config, {
+        capabilities = global_capabilities,
+    })
+
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
