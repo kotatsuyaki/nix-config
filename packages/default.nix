@@ -10,8 +10,8 @@ utils.lib.eachDefaultSystem (system:
     packages.bismuth = import ./bismuth.nix {
       inherit pkgs; inherit (pkgs) lib;
     };
-    packages.nodePackages = (import ./serverless-scriptable-plugin {
+    packages.nodePackages = import ./serverless-scriptable-plugin {
       inherit pkgs system;
       nodejs = pkgs.nodejs-14_x;
-    });
+    };
   })
