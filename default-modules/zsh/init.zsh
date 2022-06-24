@@ -30,6 +30,11 @@ if (( $+commands[exa] )); then
     alias lg="exa -lG"
 fi
 
+# Load 3rdparty auto-completions
 if (( $+commands[aws_completer] )); then
     complete -C $(which aws_completer) aws
+fi
+
+if (( $+commands[kubectl] )); then
+    source <(kubectl completion zsh)
 fi
