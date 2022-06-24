@@ -5,13 +5,10 @@
     curl
     wget
 
-    # extractors
-    p7zip
+    # compression tools
     unzip
+    zip
     archiver
-
-    # lang
-    python3Packages.ipython
 
     # tui apps
     tmux
@@ -30,13 +27,15 @@
     # vendor tools
     awscli2
     github-cli
+    kubectl
+    kubernetes-helm
 
     # rust stuff
     ripgrep # grep
     fd # find
     exa # ls
     tealdeer
-    bat
+    bat # cat
     dogdns # dig
     du-dust # du
     delta # diff
