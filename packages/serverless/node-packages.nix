@@ -7347,13 +7347,14 @@ in
     bypassCache = true;
     reconstructLock = true;
   };
-  serverless-rust = nodeEnv.buildNodePackage {
+  "serverless-rust-git+https://github.com/softprops/serverless-rust.git" = nodeEnv.buildNodePackage {
     name = "serverless-rust";
     packageName = "serverless-rust";
     version = "0.3.8";
-    src = fetchurl {
-      url = "https://registry.npmjs.org/serverless-rust/-/serverless-rust-0.3.8.tgz";
-      sha512 = "T1YYa3+DJghJBpvMKnZGSUMzbF735PDx+LCfyElAdwlWUSzlD2g1bAPQjUY6pwJ5Sy4DnWxfdb+3Jxv2ZJyoTA==";
+    src = fetchgit {
+      url = "https://github.com/softprops/serverless-rust.git";
+      rev = "c5d5e711fc73682d003879474a53bf7672f02ec4";
+      sha256 = "cf520165db4296e5053d8983c94c40ccb0757163dedc800c9269b60075171d0c";
     };
     dependencies = [
       sources."2-thenable-1.0.0"
