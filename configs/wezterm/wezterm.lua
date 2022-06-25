@@ -68,7 +68,7 @@ return {
             })
         }
     },
-    font_size = 13.0,
+    font_size = 12.0,
     color_scheme = 'OneHalfLight',
     check_for_updates = false,
     tab_max_width = 32,
