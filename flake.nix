@@ -76,6 +76,19 @@
           ./opt-modules/ipfs.nix
           ./opt-modules/avahi.nix
           ./opt-modules/k3s.nix
+          (import ./services/frpc.nix {
+            raw-config = ''
+              [common]
+              server_addr = lightsail.kotatsu.tk
+              server_port = 7000
+
+              [ssh]
+              type = tcp
+              local_ip = 127.0.0.1
+              local_port = 22
+              remote_port = 7001
+            '';
+          })
         ];
       };
 
