@@ -23,6 +23,7 @@
     dnsutils
     fzf
     fx
+    wuzz
 
     # vendor tools
     awscli2
