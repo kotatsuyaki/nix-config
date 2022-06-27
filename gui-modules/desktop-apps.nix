@@ -5,6 +5,7 @@
     chromium
     kotatogram-desktop
     teams
+    skypeforlinux
     zathura
     mpv
     gimp
