@@ -76,6 +76,7 @@
           ./opt-modules/ipfs.nix
           ./opt-modules/avahi.nix
           ./opt-modules/k3s.nix
+          ./opt-modules/vmware.nix
           (import ./services/frpc.nix {
             raw-config = ''
               [common]
