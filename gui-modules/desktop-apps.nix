@@ -14,6 +14,7 @@
     appimage-run
 
     firefox
+    qbittorrent
 
     sublime4
     sublime-merge
