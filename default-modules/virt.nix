@@ -1,7 +1,7 @@
-{ pkgs, inputs, system, hasGui, ... }: {
+{ pkgs, inputs, system, isPlasma, isGnome, ... }: {
   environment.systemPackages = with pkgs; [
     inputs.unstable.legacyPackages.${system}.quickemu
-  ] ++ (if hasGui then [ pkgs.spice-gtk ] else [ ]);
+  ] ++ (if (isPlasma || isGnome) then [ pkgs.spice-gtk ] else [ ]);
 
   virtualisation = {
     spiceUSBRedirection.enable = true;

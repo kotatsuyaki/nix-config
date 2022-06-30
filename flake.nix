@@ -36,7 +36,8 @@
 
       # Wrapper for nixosSystem
       os-config =
-        { hasGui ? false
+        { isPlasma ? false
+        , isGnome ? false
         , extraModules ? [ ]
         , ...
         }: lib.nixosSystem rec {
@@ -45,17 +46,20 @@
             inherit self;
             inherit (self) inputs;
             inherit system;
-            inherit hasGui;
+            inherit isPlasma;
+            inherit isGnome;
           };
           modules =
             default-modules ++
             extraModules ++
-            (lib.optionals hasGui gui-modules);
+            (lib.optionals (isPlasma || isGnome) gui-modules) ++
+            (lib.optionals isPlasma [ ./de-modules/plasma.nix ]) ++
+            (lib.optionals isGnome [ ./de-modules/gnome.nix ]);
         };
     in
     dev-shells // custom-pkgs // {
       nixosConfigurations.x13 = os-config {
-        hasGui = true;
+        isPlasma = true;
         extraModules = [
           ./hardware/x13.nix
           ./opt-modules/fprintd.nix
@@ -65,7 +69,7 @@
       };
 
       nixosConfigurations.rx570 = os-config {
-        hasGui = true;
+        isPlasma = true;
         extraModules = [
           ./hardware/rx570.nix
           ./opt-modules/waydroid.nix
@@ -94,7 +98,8 @@
       };
 
       nixosConfigurations.rtx3070 = os-config {
-        hasGui = false;
+        isPlasma = false;
+        isGnome = true;
         extraModules = [
           ./hardware/rtx3070.nix
           ./opt-modules/nvidia.nix
