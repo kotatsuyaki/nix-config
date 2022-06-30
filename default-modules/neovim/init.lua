@@ -437,7 +437,7 @@ function config_lsp()
     local servers = {
         'pyright', 'clangd', 'texlab', 'rnix',
         'tsserver', 'svls', 'denols', 'yamlls',
-        'taplo',
+        'taplo', 'wgsl_analyzer',
         {
             'clangd',
             filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
