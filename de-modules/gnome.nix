@@ -9,6 +9,8 @@
   environment.systemPackages = with pkgs; with gnomeExtensions; [
     appindicator
     pop-shell
+    system-monitor
+    gnome.gnome-tweaks
   ];
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
