@@ -7,6 +7,7 @@
         fcitx5-rime
         fcitx5-gtk
         fcitx5-configtool
+        fcitx5-chewing
       ];
     };
   };
