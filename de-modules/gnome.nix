@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   services.xserver = {
     enable = true;
-    xkbOptions = "altwin:swap_alt_win";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     libinput.enable = true;
