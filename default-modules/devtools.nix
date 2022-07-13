@@ -20,6 +20,7 @@
     # cli tools
     zsh
     git
+    git-extras
     dnsutils
     fzf
     fx
