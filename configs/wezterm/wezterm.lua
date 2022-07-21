@@ -31,9 +31,10 @@ return {
     },
     window_background_opacity = 0.9,
     use_ime = true,
+    enable_wayland = false,
     freetype_load_target = "HorizontalLcd",
     font = wezterm.font_with_fallback({
-        {family='Iosevka Term', weight='Medium', stretch='Expanded'},
+        { family = 'Iosevka Term', weight = 'Medium', stretch = 'Expanded' },
         'Inconsolata Nerd Font',
         'Noto Sans CJK TC',
         'Noto Color Emoji',
@@ -42,18 +43,18 @@ return {
         {
             intensity = "Bold",
             font = wezterm.font_with_fallback({
-                {family='Iosevka Term', weight='Black', stretch='Expanded'},
+                { family = 'Iosevka Term', weight = 'Black', stretch = 'Expanded' },
                 'Inconsolata Nerd Font',
-                {family='Noto Sans CJK TC', weight='Bold'},
+                { family = 'Noto Sans CJK TC', weight = 'Bold' },
                 'Noto Color Emoji',
             })
         },
         {
             italic = true,
             font = wezterm.font_with_fallback({
-                {family='Iosevka Term', weight='Medium', stretch='Expanded', italic=true},
+                { family = 'Iosevka Term', weight = 'Medium', stretch = 'Expanded', italic = true },
                 'Inconsolata Nerd Font',
-                {family='Noto Sans CJK TC', weight='Bold', italic=true},
+                { family = 'Noto Sans CJK TC', weight = 'Bold', italic = true },
                 'Noto Color Emoji',
             })
         },
@@ -61,9 +62,9 @@ return {
             italic = true,
             intensity = "Bold",
             font = wezterm.font_with_fallback({
-                {family='Iosevka Term', weight='Black', stretch='Expanded', italic=true},
+                { family = 'Iosevka Term', weight = 'Black', stretch = 'Expanded', italic = true },
                 'Inconsolata Nerd Font',
-                {family='Noto Sans CJK TC', weight='Bold', italic=true},
+                { family = 'Noto Sans CJK TC', weight = 'Bold', italic = true },
                 'Noto Color Emoji',
             })
         }
